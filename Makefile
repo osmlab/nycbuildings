@@ -18,11 +18,11 @@ DistPly: DistPly.zip
 
 BldgPly/buildings.shp: BldgPly
 	rm -f BldgPly/buildings.*
-	ogr2ogr -simplify 0.2 -t_srs EPSG:4326 -overwrite BldgPly/buildings.shp BldgPly/BldgPly.shp
+	ogr2ogr -simplify 0.2 -t_srs EPSG:4326 -overwrite BldgPly/buildings.shp BldgPly/DOITT_BUILDING_01_13SEPT2010.shp
 
 DistPly/districts.shp: DistPly
 	rm -f DistPly/districts.*
-	ogr2ogr -t_srs EPSG:4326 DistPly/districts.shp DistPly/DistPly.shp
+	ogr2ogr -t_srs EPSG:4326 DistPly/districts.shp DistPly/nyedwi.shp
 
 chunks: directories
 	python chunk.py BldgPly/buildings.shp DistPly/districts.shp chunks/buildings-%s.shp ElectDist
