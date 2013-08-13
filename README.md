@@ -4,16 +4,15 @@ NYC buiding and address import
 **[Work in progress](https://github.com/osmlab/nycbuildings/issues?state=open)**
 
 Generates an OSM file of buildings with addresses per NYC election districts,
-ready to be used in JOSM for a manual review and upload to OpenStreetMap. *Currently will only export buildings*.
+ready to be used in JOSM for a manual review and upload to OpenStreetMap.
 
 ## Data
 
-- [Building perimeter outlines](https://nycopendata.socrata.com/Housing-Development/Building-Perimeter-Outlines/r7fd-yd5e)
-- address shapefile coming soon
+- [Building perimeter outlines](https://dl.dropboxusercontent.com/u/479174/NYC/BUILDING_7_25_13.zip)
+- [Address points](https://dl.dropboxusercontent.com/u/479174/NYC/NYC_AddressPoint.zip)
 
 ## Status
 
-- Needs implementation
 - Needs peer review
 
 ## Prerequisites 
