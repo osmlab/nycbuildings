@@ -33,7 +33,7 @@ addresses/addresses.shp: addresses
 
 districts/districts.shp: districts
 	rm -f districts/districts.*
-	ogr2ogr -t_srs EPSG:4326 districts/districts.shp districts/nyedwi.shp
+	ogr2ogr -simplify 20 -t_srs EPSG:4326 districts/districts.shp districts/nyedwi.shp
 
 chunks: directories
 	python chunk.py buildings/buildings.shp districts/districts.shp chunks/buildings-%s.shp ElectDist
