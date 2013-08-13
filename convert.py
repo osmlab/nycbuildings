@@ -18,12 +18,11 @@ def convert(buildingIn, addressIn, buildingOut, addressOut):
     # Load all addresses.
     addresses = []
     
-    # TODO: uncomment when address data becomes available
-    # with collection(addressIn, "r") as input:
-    #     for address in input:
-    #         shape = asShape(address['geometry'])
-    #         shape.original = address
-    #         addresses.append(shape)
+    with collection(addressIn, "r") as input:
+        for address in input:
+            shape = asShape(address['geometry'])
+            shape.original = address
+            addresses.append(shape)
 
     # Load and index all buildings.
     buildingIdx = index.Index()
@@ -95,7 +94,10 @@ def convert(buildingIn, addressIn, buildingOut, addressOut):
     # Appends a building to a given OSM xml document.
     def appendBuilding(building, address, osmXml):
         # Export building, create multipolygon if there are interior shapes.
-        way = appendNewWay(list(building['shape'].exterior.coords), osmXml)
+        try:
+            way = appendNewWay(list(building['shape'].exterior.coords), osmXml)
+        except AttributeError:
+            pprint(building['properties'])
         interiors = []
         for interior in building['shape'].interiors:
             interiors.append(appendNewWay(list(interior.coords), osmXml))
@@ -109,8 +111,8 @@ def convert(buildingIn, addressIn, buildingOut, addressOut):
             way = relation
         way.append(etree.Element('tag', k='building', v='yes'))
         if 'HEIGHT_ROO' in building['properties']:
-            height = (float(building['properties']['HEIGHT_ROO']) * 12) / 0.0254
-            way.append(etree.Element('tag', k='height', v=height))
+            height = round(((building['properties']['HEIGHT_ROO'] * 12) * 0.0254), 1)
+            way.append(etree.Element('tag', k='height', v=str(height)))
         if address: appendAddress(address, way)
 
     # Export buildings. Only export address with building if thre is exactly
