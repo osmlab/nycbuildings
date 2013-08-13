@@ -5,6 +5,7 @@ from rtree import index
 from shapely.geometry import asShape
 from shapely import speedups
 from sys import argv
+from pprint import pprint
 
 speedups.enable()
 
@@ -26,15 +27,23 @@ def chunk(featureFileName, sectionFileName, pattern, key = None):
                 fileName = pattern % i
                 if key:
                     fileName = pattern % section['properties'][key]
-                with collection(fileName, 'w', 'ESRI Shapefile',
-                        schema = featureFile.schema,
-                        crs = featureFile.crs) as output:
-                    sectionShape = asShape(section['geometry'])
-                    for j in featureIdx.intersection(sectionShape.bounds):
-                        if asShape(features[j]['geometry']).intersects(sectionShape):
-                            output.write(features[j])
-                    print "Exported %s" % fileName
-                    i = i + 1
+                    properties = {}
+                    try:
+                        with collection(fileName, 'w', 'ESRI Shapefile',
+                                schema = featureFile.schema,
+                                crs = featureFile.crs) as output:
+                            sectionShape = asShape(section['geometry'])
+                            for j in featureIdx.intersection(sectionShape.bounds):
+                                if asShape(features[j]['geometry']).intersects(sectionShape):
+                                    properties = features[j]['properties']
+                                    output.write(features[j])
+                            print "Exported %s" % fileName
+                            i = i + 1
+                    except ValueError:
+                        print "Error exporting " + fileName
+                        pprint(properties)
+                        pprint(featureFile.schema)
+
 
 usage = """
 chunk.py
