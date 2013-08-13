@@ -51,13 +51,16 @@ def convert(buildingIn, addressIn, buildingOut, addressOut):
     def convertAddress(address):
         result = dict()
         if all (k in address for k in ('HOUSE_NUMB', 'STREET_NAM')):
-            result['addr:housenumber'] = str(address['HOUSE_NUMB'])
-            if re.match('^(\d+)\w\w$', address['STREET_NAM']): # Test for 2ND, 14TH, 21ST
-                streetname = address['STREET_NAM'].lower()
-            else:
-                streetname = address['STREET_NAM'].title()
-            result['addr:street'] = streetname
-            result['addr:postcode'] = str(int(address['ZIPCODE']))
+            if address['HOUSE_NUMB']:
+                result['addr:housenumber'] = str(address['HOUSE_NUMB'])
+            if address['STREET_NAM']:
+                if re.match('^(\d+)\w\w$', address['STREET_NAM']): # Test for 2ND, 14TH, 21ST
+                    streetname = address['STREET_NAM'].lower()
+                else:
+                    streetname = address['STREET_NAM'].title()
+                result['addr:street'] = streetname
+            if address['ZIPCODE']:
+                result['addr:postcode'] = str(int(address['ZIPCODE']))
         return result
 
     # Appends new node or returns existing if exists.
@@ -94,13 +97,15 @@ def convert(buildingIn, addressIn, buildingOut, addressOut):
     # Appends a building to a given OSM xml document.
     def appendBuilding(building, address, osmXml):
         # Export building, create multipolygon if there are interior shapes.
+        interiors = []
         try:
             way = appendNewWay(list(building['shape'].exterior.coords), osmXml)
+            for interior in building['shape'].interiors:
+                interiors.append(appendNewWay(list(interior.coords), osmXml))
         except AttributeError:
-            pprint(building['properties'])
-        interiors = []
-        for interior in building['shape'].interiors:
-            interiors.append(appendNewWay(list(interior.coords), osmXml))
+            way = appendNewWay(list(building['shape'][0].exterior.coords), osmXml)
+            for interior in building['shape'][0].interiors:
+                interiors.append(appendNewWay(list(interior.coords), osmXml))
         if len(interiors) > 0:
             relation = etree.Element('relation', visible='true', id=str(newOsmId('way')))
             relation.append(etree.Element('member', type='way', role='outer', ref=way.get('id')))
