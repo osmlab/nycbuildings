@@ -1,4 +1,4 @@
-# Convert DC building footprints and addresses into importable OSM files.
+# Convert NYC building footprints and addresses into importable OSM files.
 from fiona import collection
 from lxml import etree
 from lxml.etree import tostring
@@ -14,7 +14,7 @@ speedups.enable()
 
 # Converts given building and address shapefiles into corresponding OSM XML
 # files.
-def convert(buildingIn, addressIn, buildingOut, addressOut):
+def convert(buildingIn, addressIn, osmOut):
     # Load all addresses.
     addresses = []
     
@@ -120,8 +120,8 @@ def convert(buildingIn, addressIn, buildingOut, addressOut):
             way.append(etree.Element('tag', k='height', v=str(height)))
         if address: appendAddress(address, way)
 
-    # Export buildings. Only export address with building if thre is exactly
-    # one address per building.
+    # Export buildings & addresses. Only export address with building if thre is exactly
+    # one address per building. Export remaining addresses as individual nodes.
     addresses = []
     osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
     for building in buildings:
@@ -131,28 +131,31 @@ def convert(buildingIn, addressIn, buildingOut, addressOut):
         else:
             addresses.extend(building['properties']['addresses'])
         appendBuilding(building, address, osmXml)
-    with open(buildingOut, 'w') as outFile:
-        outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
-        print "Exported " + buildingOut
-
-    # Export separate addresses.
     if (len(addresses) > 0):
-        osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
         for address in addresses:
             node = appendNewNode(address['geometry']['coordinates'], osmXml)
             appendAddress(address, node)
-        with open(addressOut, 'w') as outFile:
-            outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
-            print "Exported " + addressOut
+    with open(osmOut, 'w') as outFile:
+        outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
+        print "Exported " + osmOut
 
-# Run conversions. Expects an chunks/addresses-[tract id].shp for each
-# chunks/buildings-[tract id].shp. Optinally convert only one census tract.
+    # Export separate addresses.
+    #if (len(addresses) > 0):
+    #    osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
+    #    for address in addresses:
+    #        node = appendNewNode(address['geometry']['coordinates'], osmXml)
+    #        appendAddress(address, node)
+    #    with open(addressOut, 'w') as outFile:
+    #        outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
+    #        print "Exported " + addressOut
+
+# Run conversions. Expects an chunks/addresses-[district id].shp for each
+# chunks/buildings-[district id].shp. Optinally convert only one election district.
 if (len(argv) == 2):
     convert(
         'chunks/buildings-%s.shp' % argv[1],
         'chunks/addresses-%s.shp' % argv[1],
-        'osm/buildings-%s.osm' % argv[1],
-        'osm/addresses-%s.osm' % argv[1])
+        'osm/buildings-addresses-%s.osm' % argv[1])
 else:
     buildingFiles = glob("chunks/buildings-*.shp")
     for buildingFile in buildingFiles:
@@ -160,5 +163,4 @@ else:
         convert(
             buildingFile,
             'chunks/addresses-%s.shp' % matches[0],
-            'osm/buildings-%s.osm' % matches[0],
-            'osm/addresses-%s.osm' % matches[0])
+            'osm/buildings-addresses-%s.osm' % matches[0])
