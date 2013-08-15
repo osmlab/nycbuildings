@@ -139,16 +139,6 @@ def convert(buildingIn, addressIn, osmOut):
         outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         print "Exported " + osmOut
 
-    # Export separate addresses.
-    #if (len(addresses) > 0):
-    #    osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
-    #    for address in addresses:
-    #        node = appendNewNode(address['geometry']['coordinates'], osmXml)
-    #        appendAddress(address, node)
-    #    with open(addressOut, 'w') as outFile:
-    #        outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
-    #        print "Exported " + addressOut
-
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
 # chunks/buildings-[district id].shp. Optinally convert only one election district.
 if (len(argv) == 2):
