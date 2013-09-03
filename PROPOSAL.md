@@ -8,11 +8,11 @@ In March 2012, New York City released all government data to the public. Of part
 
 *Supporters*
 
-- Liz Barry
-- Alex Barth
-- Eric Brelsford
+- Liz Barry (TBC)
+- Alex Barth (TBC)
+- Eric Brelsford (TBC)
 - Matt Greene
-- Serge Wroclawski
+- Serge Wroclawski (TBC)
 
 ![](https://github-camo.global.ssl.fastly.net/0cfc1d9a6d96855901f48b9ffda04e5d72253589/687474703a2f2f636c2e6c792f696d6167652f31443143334d3079334d34332f53637265656e25323053686f74253230323031332d30382d30322532306174253230312e35322e3033253230504d2e706e67)
 
@@ -51,7 +51,7 @@ As of September 1, 2013, address points are not yet released on New York City's 
 
 ### Community based
 
-The import will be conducted in two phases. In a first pahse, a handful of mappers will start the import and get a direct feel for the intricacies of the task. This group is currently made up of Liz Barry, Alex Barth, Eric Brelsford, Matt Greene and Alex Barth. Individuals who'd like to join this advance group, please open a ticket on http://github.com/osmlab/nycbuildings.
+The import will be conducted in two phases. In a first pahse, a handful of mappers will start the import and get a direct feel for the intricacies of the task. This group is currently made up of Liz Barry (TBC), Alex Barth, Eric Brelsford (TBC), Matt Greene and Serge Wroclawski (TBC). Individuals who'd like to join this advance group, please open a ticket on http://github.com/osmlab/nycbuildings.
 
 Based on findings and progress in the first phase, tasks will be opened to broader group of people kicking off with a community session in New York City in mid October.
 
