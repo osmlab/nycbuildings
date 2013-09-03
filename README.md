@@ -106,9 +106,3 @@ Each address is a node tagged with:
 ## Related
 
 - [NYC possible imports](http://wiki.openstreetmap.org/wiki/New_York,_New_York#Possible_Imports)
-
-## And yeah, they're pretty
-
-[![](http://cl.ly/image/1D1C3M0y3M43/Screen%20Shot%202013-08-02%20at%201.52.03%20PM.png)](http://a.tiles.mapbox.com/v3/villeda.nyc-buildings/page.htm)
-
-[![](http://cl.ly/image/34132N0T2r0T/Screen%20Shot%202013-08-02%20at%201.52.16%20PM.png)](http://a.tiles.mapbox.com/v3/villeda.nyc-buildings/page.htm)
