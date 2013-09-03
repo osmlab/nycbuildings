@@ -45,9 +45,10 @@ As of September 1, 2013, address points are not yet released on New York City's 
 
 ## Import process
 
-- Process building+address shapefiles into election district size .osm files (done)
-- Review by NYC community, imports-us and imports working group (current stage)
-- Upload data in a community based process (not started)
+1. Process building+address shapefiles into election district size .osm files (done)
+2. Review by NYC community, imports-us and imports working group (current stage)
+3. Upload data by advance group of mappers (not started)
+4. Based on (3) involve a larger group of mappers (not started)
 
 ### Community based
 
