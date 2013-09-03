@@ -1,7 +1,7 @@
 NYC buiding and address import
 ==============================
 
-**[Work in progress](https://github.com/osmlab/nycbuildings/issues?state=open)**
+**[Work in progress, see proposal](https://github.com/osmlab/nycbuildings/blob/master/PROPOSAL.md)**
 
 Generates an OSM file of buildings with addresses per NYC election districts,
 ready to be used in JOSM for a manual review and upload to OpenStreetMap.
