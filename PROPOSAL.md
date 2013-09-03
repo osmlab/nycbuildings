@@ -83,6 +83,10 @@ polygons and handles multipolygons.
 - Sample: Building and address OSM file ready for manual review and upload TODO
 - Sample: Full export of all cleaned and concatenated addresses TODO
 
+## Attribute mapping
+
+See [README.md](https://github.com/osmlab/nycbuildings).
+
 ## Timeline
 
 - Proposal review September 3rd - September 13th 2013.
