@@ -90,7 +90,7 @@ See [README.md](https://github.com/osmlab/nycbuildings).
 ## Timeline
 
 - Proposal review September 3rd - September 13th 2013.
-- Full release of 
+- Full release of data on [NYC Open Data](https://data.cityofnewyork.us/) - ~ September 15th 2013.
 - Incorporate feedback and test imports by September 20th 2013
 - First small group imports September 20th - October 12th
 - Community import sessions October 12 and 13
