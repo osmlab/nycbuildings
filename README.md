@@ -1,4 +1,4 @@
-NYC buiding and address import
+NYC building and address import
 ==============================
 
 **[Work in progress, see proposal](https://github.com/osmlab/nycbuildings/blob/master/PROPOSAL.md)**
