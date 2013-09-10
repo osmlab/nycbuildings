@@ -4,15 +4,15 @@
 
 ## Introduction
 
-In March 2012, New York City released all government data to the public. Of particular interest to OpenStreetMap are building perimeter outlines and address point data, both datasets are of high quality and labor intensive to collect manually. This proposal suggests a full community supported import of all NYC building and address data, reconciling overlaps with OSM data. This proposal is complementary to [changewithin](https://github.com/osmlab/changewithin) a tool used by the NYC government to detect building and address changes in OSM to drive updates to their public datasets.
+In March 2012, New York City released all government data to the public. Of particular interest to OpenStreetMap are building perimeter outlines and address point data, both datasets are of high quality and labor intensive to collect manually. This proposal suggests a full community supported import of all NYC building and address data, reconciling overlaps with OSM data. This proposal is complementary to [changewithin](https://github.com/osmlab/changewithin) a tool used by the NYC government to detect building and address changes in OSM to drive updates to their public datasets. The idea of this proposal is not only to improve OpenStreetMap in New York City with vital building and address data, but set a strong example of how governments can engage with OpenStreetMap by opening geo data and reaping a benefit by gaining an additional vector for detecting changes. Further we would like to take this effort as an opportunity to further strengthen the New York City OpenStreetMap community. 
 
 *Supporters*
 
-- Liz Barry (TBC)
-- Alex Barth
-- Eric Brelsford
-- Matt Greene
-- Serge Wroclawski
+- Liz Barry - OSM NYC / Public Laboratory (TBC)
+- Alex Barth - MapBox / OSM US
+- Eric Brelsford - OSM NYC
+- Matt Greene - MapBox
+- Serge Wroclawski - OSM NYC
 
 ![](https://github-camo.global.ssl.fastly.net/0cfc1d9a6d96855901f48b9ffda04e5d72253589/687474703a2f2f636c2e6c792f696d6167652f31443143334d3079334d34332f53637265656e25323053686f74253230323031332d30382d30322532306174253230312e35322e3033253230504d2e706e67)
 
