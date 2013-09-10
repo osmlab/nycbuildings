@@ -4,7 +4,9 @@
 
 ## Introduction
 
-In March 2012, New York City released all government data to the public. Of particular interest to OpenStreetMap are building perimeter outlines and address point data, both datasets are of high quality and labor intensive to collect manually. This proposal suggests a full community supported import of all NYC building and address data, reconciling overlaps with OSM data. This proposal is complementary to [changewithin](https://github.com/osmlab/changewithin) a tool used by the NYC government to detect building and address changes in OSM to drive updates to their public datasets. The idea of this proposal is not only to improve OpenStreetMap in New York City with vital building and address data, but set a strong example of how governments can engage with OpenStreetMap by opening geo data and reaping a benefit by gaining an additional vector for detecting changes. Further we would like to take this effort as an opportunity to further strengthen the New York City OpenStreetMap community. 
+In March 2012, New York City released all government data to the public. Of particular interest to OpenStreetMap are building perimeter outlines and address point data, both datasets are of high quality and labor intensive to collect manually. This proposal suggests a full community supported import of all NYC building and address data, reconciling overlaps with OSM data. This proposal is complementary to [changewithin](https://github.com/osmlab/changewithin) a tool used by the NYC government to detect building and address changes in OSM to drive updates to their public datasets.
+
+The idea of this proposal is not only to improve OpenStreetMap in New York City with vital building and address data, but set a strong example of how governments can engage with OpenStreetMap by opening geo data and thus benefiting by gaining an additional vector for detecting changes in the real world. Further we would like to take this effort as an opportunity to further strengthen the New York City OpenStreetMap community. 
 
 *Supporters*
 
