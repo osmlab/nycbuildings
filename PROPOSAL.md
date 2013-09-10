@@ -10,7 +10,7 @@ In March 2012, New York City released all government data to the public. Of part
 
 - Liz Barry (TBC)
 - Alex Barth (TBC)
-- Eric Brelsford (TBC)
+- Eric Brelsford
 - Matt Greene
 - Serge Wroclawski (TBC)
 
