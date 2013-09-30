@@ -2,26 +2,32 @@ all: buildings/buildings.shp addresses/addresses.shp districts/districts.shp chu
 
 clean:
 	rm -f building_footprints_shape_09-13.zip
-	rm -f NYC_AddressPoints_0913.zip
+	rm -f NYC_AddressPoint.zip
 	rm -f nyedwi_13a.zip
 
 building_footprints_shape_09-13.zip:
 	curl -L "https://data.cityofnewyork.us/download/tb92-6tj8/application/zip" -o building_footprints_shape_09-13.zip
 
-NYC_AddressPoints_0913.zip:
-	curl -L "https://data.cityofnewyork.us/download/4iq4-tuhq/application/zip" -o NYC_AddressPoints_0913.zip
+NYC_AddressPoint.zip:
+	curl -L "https://dl.dropboxusercontent.com/u/479174/NYC/NYC_AddressPoint.zip" -o NYC_AddressPoint.zip
 
 nyedwi_13a.zip:
 	curl -L "http://www.nyc.gov/html/dcp/download/bytes/nyedwi_13a.zip" -o nyedwi_13a.zip
 
 buildings: building_footprints_shape_09-13.zip
+	rm -rf buildings
 	unzip building_footprints_shape_09-13.zip -d buildings
+	rm -rf building_footprints_shape_09-13.zip
 
-addresses: NYC_AddressPoints_0913.zip
-	unzip NYC_AddressPoints_0913.zip -d addresses
+addresses: NYC_AddressPoint.zip
+	rm -rf addresses
+	unzip NYC_AddressPoint.zip -d addresses
+	rm NYC_AddressPoint.zip
 
 districts: nyedwi_13a.zip
+	rm -rf districts
 	unzip -d districts -j nyedwi_13a.zip
+	rm nyedwi_13a.zip
 
 buildings/buildings.shp: buildings
 	rm -f buildings/buildings.*
@@ -29,7 +35,7 @@ buildings/buildings.shp: buildings
 
 addresses/addresses.shp: addresses
 	rm -f addresses/addresses.*
-	ogr2ogr -t_srs EPSG:4326 -overwrite addresses/addresses.shp addresses/NYC_AddressPoints_0913.shp
+	ogr2ogr -t_srs EPSG:4326 -overwrite addresses/addresses.shp addresses/NYC_AddressPoint.shp
 
 districts/districts.shp: districts
 	rm -f districts/districts.*
