@@ -31,7 +31,7 @@ districts: nyedwi_13a.zip
 
 buildings/buildings.shp: buildings
 	rm -f buildings/buildings.*
-	ogr2ogr -simplify 0.2 -t_srs EPSG:4326 -overwrite buildings/buildings.shp buildings/building_footprints_shape_09-13.shp
+	ogr2ogr -simplify 0.2 -t_srs EPSG:4326 -overwrite buildings/buildings.shp buildings/building_0913.shp
 
 addresses/addresses.shp: addresses
 	rm -f addresses/addresses.*
