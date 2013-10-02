@@ -17,13 +17,14 @@ ready to be used in JOSM for a manual review and upload to OpenStreetMap.
 
 ## Prerequisites 
 
-    libxml2 
+    Python 2.7.x
+    pip
+    libxml2
     libxslt
     spatialindex
-    GDAL  
-   
+    GDAL
 
-## Mac OSX specific install 
+### Installing prerequisites on Mac OSX
   
     # install brew http://brew.sh
 
@@ -32,6 +33,13 @@ ready to be used in JOSM for a manual review and upload to OpenStreetMap.
     brew install spatialindex 
     brew install gdal 
 
+### Installing prerequisites on Ubuntu
+
+    apt-get install python-pip
+    apt-get install gdal-bin
+    apt-get install libxml2
+    apt-get install libxslt
+    apt-get install libspatialindex-dev
 
 ## Set up Python virtualenv and get dependencies
     # may need to easy_install pip and pip install virtualenv 
