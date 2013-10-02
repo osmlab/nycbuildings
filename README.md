@@ -19,6 +19,7 @@ ready to be used in JOSM for a manual review and upload to OpenStreetMap.
 
     Python 2.7.x
     pip
+    virtualenv
     libxml2
     libxslt
     spatialindex
@@ -36,9 +37,13 @@ ready to be used in JOSM for a manual review and upload to OpenStreetMap.
 ### Installing prerequisites on Ubuntu
 
     apt-get install python-pip
+    apt-get install python-virtualenv
     apt-get install gdal-bin
-    apt-get install libxml2
-    apt-get install libxslt
+    apt-get install libgdal-dev
+    apt-get install libxml2-dev
+    apt-get install libxslt-dev
+    apt-get install python-lxml
+    apt-get install python-dev
     apt-get install libspatialindex-dev
 
 ## Set up Python virtualenv and get dependencies
