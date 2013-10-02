@@ -118,6 +118,8 @@ def convert(buildingIn, addressIn, osmOut):
         if 'HEIGHT_ROO' in building['properties']:
             height = round(((building['properties']['HEIGHT_ROO'] * 12) * 0.0254), 1)
             way.append(etree.Element('tag', k='height', v=str(height)))
+        if 'BIN' in building['properties']:
+            way.append(etree.Element('tag', k='nycdoitt:bin', v=str(building['properties']['BIN'])))
         if address: appendAddress(address, way)
 
     # Export buildings & addresses. Only export address with building if thre is exactly
