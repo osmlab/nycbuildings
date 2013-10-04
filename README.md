@@ -113,6 +113,9 @@ Each address is a node tagged with:
     addr:housenumber="HOUSE_NUMB"
     addr:streetname="STREET_NAM"
     addr:postcode=ZIPCODE
+    nycdoitt:bin=BIN
+
+BIN is the NYC DoITT building identifier.
 
 (All entities in CAPS from address file.)
 
