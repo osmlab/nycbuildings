@@ -103,7 +103,7 @@ Each building is a closed way tagged with:
     addr:housenumber="HOUSE_NUMB" # If available
     addr:streetname="STREET_NAM" # If available
     addr:postcode="ZIPCODE" # If available
-    nycdoitt:bin=BIN # NYC DoITT building identifier
+    nycdoitt:bin="BIN" # NYC DoITT building identifier
 
 (All "addr" entities in CAPS are from address file.)
 
@@ -113,7 +113,7 @@ Each address is a node tagged with:
 
     addr:housenumber="HOUSE_NUMB"
     addr:streetname="STREET_NAM"
-    addr:postcode=ZIPCODE
+    addr:postcode="ZIPCODE"
 
 (All entities in CAPS from address file.)
 
