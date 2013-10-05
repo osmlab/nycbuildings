@@ -45,6 +45,7 @@ ready to be used in JOSM for a manual review and upload to OpenStreetMap.
     apt-get install python-lxml
     apt-get install python-dev
     apt-get install libspatialindex-dev
+    apt-get install unzip
 
 ## Set up Python virtualenv and get dependencies
     # may need to easy_install pip and pip install virtualenv 
