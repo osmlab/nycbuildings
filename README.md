@@ -100,10 +100,11 @@ You can run stages separately, like so:
 Each building is a closed way tagged with:
 
     building="yes"
-    height="HEIGHT_ROO" # If available
+    height="HEIGHT_ROO" # In meters, if available
     addr:housenumber="HOUSE_NUMB" # If available
     addr:streetname="STREET_NAM" # If available
     addr:postcode="ZIPCODE" # If available
+    nycdoitt:bin="BIN" # NYC DoITT building identifier
 
 (All "addr" entities in CAPS are from address file.)
 
@@ -113,7 +114,7 @@ Each address is a node tagged with:
 
     addr:housenumber="HOUSE_NUMB"
     addr:streetname="STREET_NAM"
-    addr:postcode=ZIPCODE
+    addr:postcode="ZIPCODE"
 
 (All entities in CAPS from address file.)
 
