@@ -8,8 +8,7 @@ ready to be used in JOSM for a manual review and upload to OpenStreetMap.
 
 ## Data
 
-- [Building perimeter outlines](https://dl.dropboxusercontent.com/u/479174/NYC/BUILDING_7_25_13.zip)
-- [Address points](https://dl.dropboxusercontent.com/u/479174/NYC/NYC_AddressPoint.zip)
+[See documentation on OSM Wiki](http://wiki.openstreetmap.org/wiki/Import/Catalogue/NYC_Buildings_Addresses)
 
 ## Status
 
