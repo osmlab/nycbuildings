@@ -10,8 +10,6 @@ from glob import glob
 import re
 from pprint import pprint
 
-speedups.enable()
-
 # Converts given building and address shapefiles into corresponding OSM XML
 # files.
 def convert(buildingIn, addressIn, osmOut):
