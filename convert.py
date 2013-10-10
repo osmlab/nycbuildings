@@ -67,7 +67,7 @@ def convert(buildingIn, addressIn, osmOut):
         result = dict()
         if all (k in address for k in ('HOUSE_NUMB', 'STREET_NAM')):
             if address['HOUSE_NUMB']:
-                result['addr:housenumber'] = formatHousenumber(address['HOUSE_NUMB'])
+                result['addr:housenumber'] = formatHousenumber(address)
             if address['STREET_NAM']:
                 if re.match('^(\d+)\w\w$', address['STREET_NAM']): # Test for 2ND, 14TH, 21ST
                     streetname = address['STREET_NAM'].lower()
