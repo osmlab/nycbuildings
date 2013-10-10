@@ -47,12 +47,27 @@ def convert(buildingIn, addressIn, osmOut):
         osmIds[type] = osmIds[type] - 1
         return osmIds[type]
 
+    ## Formats multi part house numbers
+    def formatHousenumber(p):
+        def suffix(part1, part2, hyphen_type=None):
+            if not part2:
+                return str(part1)
+            if hyphen_type == 'U': # unit numbers
+                return part1 + '-' + part2
+            if len(part2) == 1 and part2.isalpha(): # single letter extensions
+                return part1 + part2
+            return part1 + ' ' + part2 # All others
+        number = suffix(p['HOUSE_NUMB'], p['HOUSE_NU_1'], p['HYPHEN_TYP'])
+        if p['HOUSE_NU_2']:
+            number = number + ' - ' + suffix(p['HOUSE_NU_2'], p['HOUSE_NU_3'])
+        return number
+
     # Converts an address
     def convertAddress(address):
         result = dict()
         if all (k in address for k in ('HOUSE_NUMB', 'STREET_NAM')):
             if address['HOUSE_NUMB']:
-                result['addr:housenumber'] = str(address['HOUSE_NUMB'])
+                result['addr:housenumber'] = formatHousenumber(address['HOUSE_NUMB'])
             if address['STREET_NAM']:
                 if re.match('^(\d+)\w\w$', address['STREET_NAM']): # Test for 2ND, 14TH, 21ST
                     streetname = address['STREET_NAM'].lower()
