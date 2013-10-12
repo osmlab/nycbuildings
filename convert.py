@@ -141,7 +141,7 @@ def convert(buildingIn, addressIn, osmOut):
     osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
     for building in buildings:
         address = None
-        if len(building['properties']['addresses']) == 1:
+        if False: # TODO: clean up.
             address = building['properties']['addresses'][0]
         else:
             addresses.extend(building['properties']['addresses'])
