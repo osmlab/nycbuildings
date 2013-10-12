@@ -135,7 +135,7 @@ def convert(buildingIn, addressIn, osmOut):
             way.append(etree.Element('tag', k='nycdoitt:bin', v=str(building['properties']['BIN'])))
         if address: appendAddress(address, way)
 
-    # Export buildings & addresses. Only export address with building if thre is exactly
+    # Export buildings & addresses. Only export address with building if there is exactly
     # one address per building. Export remaining addresses as individual nodes.
     addresses = []
     osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
