@@ -48,13 +48,21 @@ def convert(buildingIn, addressIn, osmOut):
     ## Formats multi part house numbers
     def formatHousenumber(p):
         def suffix(part1, part2, hyphen_type=None):
+            part1 = stripZeroes(part1)
             if not part2:
                 return str(part1)
+            part2 = stripZeroes(part2)
             if hyphen_type == 'U': # unit numbers
                 return part1 + '-' + part2
             if len(part2) == 1 and part2.isalpha(): # single letter extensions
                 return part1 + part2
             return part1 + ' ' + part2 # All others
+        def stripZeroes(addr): # strip leading zeroes from numbers
+            if addr.isdigit():
+                addr = str(int(addr))
+            if '-' in addr:
+                addr = str(int(addr.split('-')[0])) + '-' + str(int(addr.split('-')[1]))
+            return addr
         number = suffix(p['HOUSE_NUMB'], p['HOUSE_NU_1'], p['HYPHEN_TYP'])
         if p['HOUSE_NU_2']:
             number = number + ' - ' + suffix(p['HOUSE_NU_2'], p['HOUSE_NU_3'])
