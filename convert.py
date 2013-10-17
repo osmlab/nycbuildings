@@ -3,7 +3,7 @@ from fiona import collection
 from lxml import etree
 from lxml.etree import tostring
 from rtree import index
-from shapely.geometry import asShape
+from shapely.geometry import asShape, Point, LineString
 from shapely import speedups
 from sys import argv
 from glob import glob
@@ -61,7 +61,10 @@ def convert(buildingIn, addressIn, osmOut):
             if addr.isdigit():
                 addr = str(int(addr))
             if '-' in addr:
-                addr = str(int(addr.split('-')[0])) + '-' + str(int(addr.split('-')[1]))
+                try:
+                    addr = str(int(addr.split('-')[0])) + '-' + str(int(addr.split('-')[1]))
+                except:
+                    pass
             return addr
         number = suffix(p['HOUSE_NUMB'], p['HOUSE_NU_1'], p['HYPHEN_TYP'])
         if p['HOUSE_NU_2']:
@@ -98,7 +101,7 @@ def convert(buildingIn, addressIn, osmOut):
         osmXml.append(node)
         return node
 
-    def appendNewWay(coords, osmXml):
+    def appendNewWay(coords, intersects, osmXml):
         way = etree.Element('way', visible='true', id=str(newOsmId('way')))
         firstNid = 0
         for i, coord in enumerate(coords):
@@ -106,6 +109,24 @@ def convert(buildingIn, addressIn, osmOut):
             node = appendNewNode(coord, osmXml)
             if i == 1: firstNid = node.get('id')
             way.append(etree.Element('nd', ref=node.get('id')))
+            
+            # Check each way segment for intersecting nodes
+            int_nodes = {}
+            try:
+                line = LineString([coord, coords[i+1]])
+            except IndexError:
+                line = LineString([coord, coords[1]])
+            for idx, c in enumerate(intersects):
+                if line.buffer(0.000001).contains(Point(c[0], c[1])) and c not in coords:
+                    t_node = appendNewNode(c, osmXml)
+                    for n in way.iter('nd'):
+                        if n.get('ref') == t_node.get('id'):
+                            break
+                    else:
+                        int_nodes[t_node.get('id')] = Point(c).distance(Point(coord))
+            for n in sorted(int_nodes, key=lambda key: int_nodes[key]): # add intersecting nodes in order
+                way.append(etree.Element('nd', ref=n))
+            
         way.append(etree.Element('nd', ref=firstNid)) # close way
         osmXml.append(way)
         return way
@@ -117,16 +138,23 @@ def convert(buildingIn, addressIn, osmOut):
 
     # Appends a building to a given OSM xml document.
     def appendBuilding(building, address, osmXml):
+        # Check for intersecting buildings
+        intersects = []
+        for i in buildingIdx.intersection(building['shape'].bounds):
+            for c in buildings[i]['shape'].exterior.coords:
+                if Point(c[0], c[1]).intersects(building['shape']):
+                    intersects.append(c)
+        
         # Export building, create multipolygon if there are interior shapes.
         interiors = []
         try:
-            way = appendNewWay(list(building['shape'].exterior.coords), osmXml)
+            way = appendNewWay(list(building['shape'].exterior.coords), intersects, osmXml)
             for interior in building['shape'].interiors:
-                interiors.append(appendNewWay(list(interior.coords), osmXml))
+                interiors.append(appendNewWay(list(interior.coords), [], osmXml))
         except AttributeError:
-            way = appendNewWay(list(building['shape'][0].exterior.coords), osmXml)
+            way = appendNewWay(list(building['shape'][0].exterior.coords), intersects, osmXml)
             for interior in building['shape'][0].interiors:
-                interiors.append(appendNewWay(list(interior.coords), osmXml))
+                interiors.append(appendNewWay(list(interior.coords), [], osmXml))
         if len(interiors) > 0:
             relation = etree.Element('relation', visible='true', id=str(newOsmId('way')))
             relation.append(etree.Element('member', type='way', role='outer', ref=way.get('id')))
@@ -158,10 +186,12 @@ def convert(buildingIn, addressIn, osmOut):
         for address in addresses:
             node = appendNewNode(address['geometry']['coordinates'], osmXml)
             appendAddress(address, node)
+            
     with open(osmOut, 'w') as outFile:
         outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         print "Exported " + osmOut
 
+speedups.enable()
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
 # chunks/buildings-[district id].shp. Optinally convert only one election district.
 if (len(argv) == 2):
