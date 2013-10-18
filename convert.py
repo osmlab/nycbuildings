@@ -141,9 +141,14 @@ def convert(buildingIn, addressIn, osmOut):
         # Check for intersecting buildings
         intersects = []
         for i in buildingIdx.intersection(building['shape'].bounds):
-            for c in buildings[i]['shape'].exterior.coords:
-                if Point(c[0], c[1]).intersects(building['shape']):
-                    intersects.append(c)
+            try:
+                for c in buildings[i]['shape'].exterior.coords:
+                    if Point(c[0], c[1]).intersects(building['shape']):
+                        intersects.append(c)
+            except AttributeError:
+                for c in buildings[i]['shape'][0].exterior.coords:
+                    if Point(c[0], c[1]).intersects(building['shape']):
+                        intersects.append(c)
         
         # Export building, create multipolygon if there are interior shapes.
         interiors = []
