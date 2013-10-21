@@ -9,6 +9,7 @@ from sys import argv
 from glob import glob
 import re
 from pprint import pprint
+from decimal import Decimal, getcontext
 
 # Converts given building and address shapefiles into corresponding OSM XML
 # files.
@@ -95,8 +96,8 @@ def convert(buildingIn, addressIn, osmOut):
         if (rlon, rlat) in nodes:
             return nodes[(rlon, rlat)]
         node = etree.Element('node', visible = 'true', id = str(newOsmId('node')))
-        node.set('lon', str(coords[0]))
-        node.set('lat', str(coords[1]))
+        node.set('lon', str(Decimal(coords[0])*Decimal(1)))
+        node.set('lat', str(Decimal(coords[1])*Decimal(1)))
         nodes[(rlon, rlat)] = node
         osmXml.append(node)
         return node
@@ -148,7 +149,7 @@ def convert(buildingIn, addressIn, osmOut):
             except AttributeError:
                 for c in buildings[i]['shape'][0].exterior.coords:
                     if Point(c[0], c[1]).intersects(building['shape']):
-                        intersects.append(c)
+                        intersects.append(c)y
         
         # Export building, create multipolygon if there are interior shapes.
         interiors = []
@@ -197,6 +198,7 @@ def convert(buildingIn, addressIn, osmOut):
         print "Exported " + osmOut
 
 speedups.enable()
+getcontext().prec = 16
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
 # chunks/buildings-[district id].shp. Optinally convert only one election district.
 if (len(argv) == 2):
