@@ -118,7 +118,7 @@ def convert(buildingIn, addressIn, osmOut):
             except IndexError:
                 line = LineString([coord, coords[1]])
             for idx, c in enumerate(intersects):
-                if line.buffer(0.000001).contains(Point(c[0], c[1])) and c not in coords:
+                if line.buffer(0.00001).contains(Point(c[0], c[1])) and c not in coords:
                     t_node = appendNewNode(c, osmXml)
                     for n in way.iter('nd'):
                         if n.get('ref') == t_node.get('id'):
