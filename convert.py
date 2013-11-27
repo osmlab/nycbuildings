@@ -80,6 +80,8 @@ def convert(buildingIn, addressIn, osmOut):
                 result['addr:housenumber'] = formatHousenumber(address)
             if address['STREET_NAM']:
                 streetname = address['STREET_NAM'].title()
+                # Expand Sr to Service Road
+                streetname = re.sub(r"(.*)\bSr\b(.*)", r"\1Service Road\2", streetname)
                 # Add ordinal suffixes to numerals
                 streetname = re.sub(r"(.*)(\d*11)\s+(.*)", r"\1\2th \3", streetname)
                 streetname = re.sub(r"(.*)(\d*12)\s+(.*)", r"\1\2th \3", streetname)
