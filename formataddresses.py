@@ -42,13 +42,13 @@ def convertAddress(address):
         if address['STREET_NAM']:
             streetname = address['STREET_NAM'].title()
             original = streetname
-            streetname = re.sub(r"(.*)\s+(\d*11)\s+(.*)", r"\1 \2th \3", streetname)
-            streetname = re.sub(r"(.*)\s+(\d*12)\s+(.*)", r"\1 \2th \3", streetname)
-            streetname = re.sub(r"(.*)\s+(\d*13)\s+(.*)", r"\1 \2th \3", streetname)
-            streetname = re.sub(r"(.*)\s+(\d*1)\s+(.*)", r"\1 \2st \3", streetname)
-            streetname = re.sub(r"(.*)\s+(\d*2)\s+(.*)", r"\1 \2nd \3", streetname)
-            streetname = re.sub(r"(.*)\s+(\d*3)\s+(.*)", r"\1 \2rd \3", streetname)
-            streetname = re.sub(r"(.*)\s+(\d*)\s+(.*)", r"\1 \2th \3", streetname)
+            streetname = re.sub(r"(.*)(\d*11)\s+(.*)", r"\1\2th \3", streetname)
+            streetname = re.sub(r"(.*)(\d*12)\s+(.*)", r"\1\2th \3", streetname)
+            streetname = re.sub(r"(.*)(\d*13)\s+(.*)", r"\1\2th \3", streetname)
+            streetname = re.sub(r"(.*)(\d*1)\s+(.*)", r"\1\2st \3", streetname)
+            streetname = re.sub(r"(.*)(\d*2)\s+(.*)", r"\1\2nd \3", streetname)
+            streetname = re.sub(r"(.*)(\d*3)\s+(.*)", r"\1\2rd \3", streetname)
+            streetname = re.sub(r"(.*)(\d+)\s+(.*)", r"\1\2th \3", streetname)
             if original != streetname:
                 print original + "," + streetname
             result['addr:street'] = streetname
