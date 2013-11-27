@@ -80,8 +80,20 @@ def convert(buildingIn, addressIn, osmOut):
                 result['addr:housenumber'] = formatHousenumber(address)
             if address['STREET_NAM']:
                 streetname = address['STREET_NAM'].title()
-                # Expand Sr to Service Road
+                # Expand Service Road
+                # See https://github.com/osmlab/nycbuildings/issues/30
                 streetname = re.sub(r"(.*)\bSr\b(.*)", r"\1Service Road\2", streetname)
+                # Expand cardinal directions on Service Roads
+                streetname = re.sub(r"(.*\bService Road\s)\bN\b(.*)", r"\1North\2", streetname)
+                streetname = re.sub(r"(.*\bService Road\s)\bE\b(.*)", r"\1East\2", streetname)
+                streetname = re.sub(r"(.*\bService Road\s)\bS\b(.*)", r"\1South\2", streetname)
+                streetname = re.sub(r"(.*\bService Road\s)\bW\b(.*)", r"\1West\2", streetname)
+                # Expand Expressway on Service Roads
+                streetname = re.sub(r"(.*)Expwy\s\bN\b(.*)", r"\1Expressway North\2", streetname)
+                streetname = re.sub(r"(.*)Expwy\s\bE\b(.*)", r"\1Expressway East\2", streetname)
+                streetname = re.sub(r"(.*)Expwy\s\bS\b(.*)", r"\1Expressway South\2", streetname)
+                streetname = re.sub(r"(.*)Expwy\s\bW\b(.*)", r"\1Expressway West\2", streetname)
+                streetname = re.sub(r"(.*)Expwy(.*)", r"\1Expressway\2", streetname)
                 # Add ordinal suffixes to numerals
                 streetname = re.sub(r"(.*)(\d*11)\s+(.*)", r"\1\2th \3", streetname)
                 streetname = re.sub(r"(.*)(\d*12)\s+(.*)", r"\1\2th \3", streetname)
