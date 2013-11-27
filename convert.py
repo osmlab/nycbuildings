@@ -79,10 +79,14 @@ def convert(buildingIn, addressIn, osmOut):
             if address['HOUSE_NUMB']:
                 result['addr:housenumber'] = formatHousenumber(address)
             if address['STREET_NAM']:
-                if re.match('^(\d+)\w\w$', address['STREET_NAM']): # Test for 2ND, 14TH, 21ST
-                    streetname = address['STREET_NAM'].lower()
-                else:
-                    streetname = address['STREET_NAM'].title()
+                streetname = address['STREET_NAM'].title()
+                streetname = re.sub(r"(.*)\s+(\d*11)\s+(.*)", r"\1 \2th \3", streetname)
+                streetname = re.sub(r"(.*)\s+(\d*12)\s+(.*)", r"\1 \2th \3", streetname)
+                streetname = re.sub(r"(.*)\s+(\d*13)\s+(.*)", r"\1 \2th \3", streetname)
+                streetname = re.sub(r"(.*)\s+(\d*1)\s+(.*)", r"\1 \2st \3", streetname)
+                streetname = re.sub(r"(.*)\s+(\d*2)\s+(.*)", r"\1 \2nd \3", streetname)
+                streetname = re.sub(r"(.*)\s+(\d*3)\s+(.*)", r"\1 \2rd \3", streetname)
+                streetname = re.sub(r"(.*)\s+(\d*)\s+(.*)", r"\1 \2th \3", streetname)
                 result['addr:street'] = streetname
             if address['ZIPCODE']:
                 result['addr:postcode'] = str(int(address['ZIPCODE']))
