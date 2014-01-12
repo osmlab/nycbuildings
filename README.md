@@ -117,6 +117,57 @@ Each address is a node tagged with:
 
 (All entities in CAPS from address file.)
 
+### House number attributes
+
+House number attributes are captured in 5 columns of the address shape file.
+
+There are four fields that begin with `HOUSE_NU` and one named `HYPHEN_TYPE`.
+
+    HOUSE_NUMBER (HOUSE_NUMB):
+    Alias: HOUSE_NUMBER
+    Data type: String
+    Width: 9
+    Precision: 0
+    Scale: 0
+
+Definition: Stores the address number.  The field will support hyphenated and range based addresses. Excludes suffixes.
+
+    HOUSE_NUMBER_SUFFIX (HOUSE_NU_1):
+    Alias: HOUSE_NUMBER_SUFFIX
+    Data type: String
+    Width: 9
+    Precision: 0
+    Scale: 0
+
+Definition: It contains any suffix (e.g. 1/2, A, B) associated with the house number.  GARAGE and REAR are not captured.
+
+    HOUSE_NUMBER_RANGE (HOUSE_NU_2):
+    Alias: HOUSE_NUMBER_RANGE
+    Data type: String
+    Width: 9
+    Precision: 0
+    Scale: 0
+
+Definition: Stores the minimum and maximum numbers of a range assigned to a building. Unlike a hyphen these are separate building numbers found on a building. Co-op City is an example.
+
+    HOUSE_NUMBER_RANGE_SUFFIX (HOUSE_NU_3):
+    Alias: HOUSE_NUMBER_RANGE_SUFFIX
+    Data type: String
+    Width: 9
+    Precision: 0
+    Scale: 0
+
+Definition: Stores suffixes associated with `HOUSE_NUMBER_RANGE` addresses.
+
+    HYPHEN_TYPE
+    Alias: HYPHEN_TYPE
+    Data type: String
+    Width: 1
+    Precision: 0
+    Scale: 0
+
+Definition: The Address Point Feature Class will support the storage of hyphenated addresses.  There are three domain values associated with hyphen types: 1) Building Ranges, 2) "Queens" style hyphens and 3) Floor numbers.
+
 ## Related
 
 - [NYC possible imports](http://wiki.openstreetmap.org/wiki/New_York,_New_York#Possible_Imports)
