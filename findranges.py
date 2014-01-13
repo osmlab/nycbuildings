@@ -6,7 +6,7 @@ import re
 def findRanges(buildings):
     onlyRanges = 0 ## Buildings with only range house numbers
     rangesAndOther = 0 ## Buildings with range numbers and other numbers
-    for building in buildings['data']:
+    for building in buildings['buildings']:
         rangeNum = 0 # House number like "10 - 12"
         total = len(building['properties']['addresses'])
         for address in building['properties']['addresses']:
@@ -16,7 +16,7 @@ def findRanges(buildings):
             onlyRanges = onlyRanges + 1
         elif rangeNum != 0:
             rangesAndOther = rangesAndOther + 1
-    print "%s,%s,%s" % (onlyRanges, rangesAndOther, len(buildings['data']))
+    print "%s,%s,%s" % (onlyRanges, rangesAndOther, len(buildings['buildings']))
 
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
 # chunks/buildings-[district id].shp. Optinally convert only one election district.

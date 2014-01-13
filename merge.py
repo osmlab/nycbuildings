@@ -32,6 +32,6 @@ def merge(buildingIn, addressIn):
                     address.original)
 
     return {
-        'data': buildings,
+        'buildings': buildings,
         'index': buildingIdx
     }
