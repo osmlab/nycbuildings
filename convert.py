@@ -89,11 +89,8 @@ def convert(buildings, osmOut):
         if (rlon, rlat) in nodes:
             return nodes[(rlon, rlat)]
         node = etree.Element('node', visible = 'true', id = str(newOsmId('node')))
-        previousPrecision = getcontext().prec
-        getcontext().prec = 16
         node.set('lon', str(Decimal(coords[0])*Decimal(1)))
         node.set('lat', str(Decimal(coords[1])*Decimal(1)))
-        getcontext().prec = previousPrecision
         nodes[(rlon, rlat)] = node
         osmXml.append(node)
         return node
@@ -194,6 +191,7 @@ def convert(buildings, osmOut):
         print "Exported " + osmOut
 
 speedups.enable()
+getcontext().prec = 16
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
 # chunks/buildings-[district id].shp. Optinally convert only one election district.
 if (len(argv) == 2):
