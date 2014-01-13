@@ -1,44 +1,18 @@
 # Convert NYC building footprints and addresses into importable OSM files.
-from fiona import collection
 from lxml import etree
 from lxml.etree import tostring
-from rtree import index
-from shapely.geometry import asShape, Point, LineString
+from shapely.geometry import Point, LineString
 from shapely import speedups
 from sys import argv
 from glob import glob
+from merge import merge
 import re
-from pprint import pprint
 from decimal import Decimal, getcontext
 
-# Converts given building and address shapefiles into corresponding OSM XML
-# files.
-def convert(buildingIn, addressIn, osmOut):
-    # Load all addresses.
-    addresses = []
-    
-    with collection(addressIn, "r") as input:
-        for address in input:
-            shape = asShape(address['geometry'])
-            shape.original = address
-            addresses.append(shape)
-
-    # Load and index all buildings.
-    buildingIdx = index.Index()
-    buildings = []
-    with collection(buildingIn, "r") as input:
-        for building in input:
-            building['shape'] = asShape(building['geometry'])
-            building['properties']['addresses'] = []
-            buildings.append(building)
-            buildingIdx.add(len(buildings) - 1, building['shape'].bounds)
-
-    # Map addresses to buildings.
-    for address in addresses:
-        for i in buildingIdx.intersection(address.bounds):
-            if buildings[i]['shape'].contains(address):
-                buildings[i]['properties']['addresses'].append(
-                    address.original)
+# Converts given buildings into corresponding OSM XML files.
+def convert(buildings, osmOut):
+    buildingIdx = buildings['index']
+    buildings = buildings['buildings']
 
     # Generates a new osm id.
     osmIds = dict(node = -1, way = -1, rel = -1)
@@ -222,14 +196,14 @@ getcontext().prec = 16
 # chunks/buildings-[district id].shp. Optinally convert only one election district.
 if (len(argv) == 2):
     convert(
-        'chunks/buildings-%s.shp' % argv[1],
-        'chunks/addresses-%s.shp' % argv[1],
+        merge('chunks/buildings-%s.shp' % argv[1],
+            'chunks/addresses-%s.shp' % argv[1]),
         'osm/buildings-addresses-%s.osm' % argv[1])
 else:
     buildingFiles = glob("chunks/buildings-*.shp")
     for buildingFile in buildingFiles:
         matches = re.match('^.*-(\d+)\.shp$', buildingFile).groups(0)
         convert(
-            buildingFile,
-            'chunks/addresses-%s.shp' % matches[0],
+            merge(buildingFile,
+                'chunks/addresses-%s.shp' % matches[0]),
             'osm/buildings-addresses-%s.osm' % matches[0])
