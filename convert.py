@@ -2,7 +2,6 @@
 from lxml import etree
 from lxml.etree import tostring
 from shapely.geometry import Point, LineString
-from shapely import speedups
 from sys import argv
 from glob import glob
 from merge import merge
@@ -190,7 +189,6 @@ def convert(buildings, osmOut):
         outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         print "Exported " + osmOut
 
-speedups.enable()
 getcontext().prec = 16
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
 # chunks/buildings-[district id].shp. Optinally convert only one election district.
