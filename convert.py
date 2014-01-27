@@ -47,7 +47,8 @@ def convert(buildings, osmOut):
             if '-' in addr:
                 try:
                     addr = addr.split('-')
-                    addr = str(int(addr[0])) + '-' + str(int(addr[1])).zfill(2)
+                    if len(addr) == 2:
+                        addr = str(int(addr[0])) + '-' + str(int(addr[1])).zfill(2)
                 except:
                     pass
             return addr
@@ -64,7 +65,7 @@ def convert(buildings, osmOut):
                 result['addr:housenumber'] = formatHousenumber(address)
             if address['STREET_NAM']:
                 streetname = address['STREET_NAM'].title()
-                streetname = streetname.replace('F D R', 'FDR')
+                streetname = streetname.replace('F D R ', 'FDR ')
                 # Expand Service Road
                 # See https://github.com/osmlab/nycbuildings/issues/30
                 streetname = re.sub(r"(.*)\bSr\b(.*)", r"\1Service Road\2", streetname)
@@ -194,9 +195,7 @@ def convert(buildings, osmOut):
             addresses.extend(building['properties']['addresses'])
 
         if len(building['shape'].exterior.coords) == 3:
-            # filter out reasonably small triangle building
-            # https://gist.github.com/anonymous/ec733d3a0764e76db516
-            if building['shape'].area > 1.1784161272767978e-08:
+            if int(building['properties']['Shape_Area']) > 0:
                 appendBuilding(building, address, osmXml)
             else:
                 print 'too small ' + building['properties']['BIN'] + ' for: ' + osmOut
