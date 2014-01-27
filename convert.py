@@ -46,7 +46,8 @@ def convert(buildings, osmOut):
                 addr = str(int(addr))
             if '-' in addr:
                 try:
-                    addr = str(int(addr.split('-')[0])) + '-' + str(int(addr.split('-')[1]))
+                    addr = addr.split('-')
+                    addr = str(int(addr[0])) + '-' + str(int(addr[1])).zfill(2)
                 except:
                     pass
             return addr
