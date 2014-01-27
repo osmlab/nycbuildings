@@ -1,8 +1,9 @@
 # Convert NYC building footprints and addresses into importable OSM files.
 
 # profiling
-import cProfile
-import pstats
+# import cProfile
+# import pstats
+# import sys
 
 from lxml import etree
 from lxml.etree import tostring
@@ -14,8 +15,8 @@ import re
 from decimal import Decimal, getcontext
 
 # profiling
-prW = cProfile.Profile()
-prW.enable()
+# prW = cProfile.Profile()
+# prW.enable()
 
 # Converts given buildings into corresponding OSM XML files.
 def convert(buildings, osmOut):
@@ -189,7 +190,17 @@ def convert(buildings, osmOut):
             address = building['properties']['addresses'][0]
         else:
             addresses.extend(building['properties']['addresses'])
-        appendBuilding(building, address, osmXml)
+
+        if len(building['shape'].exterior.coords) == 3:
+            # filter out reasonably small triangle building
+            # https://gist.github.com/anonymous/ec733d3a0764e76db516
+            if building['shape'].area > 1.1784161272767978e-08:
+                appendBuilding(building, address, osmXml)
+            else:
+                print 'too small ' + building['properties']['BIN'] + ' for: ' + osmOut
+        else:
+            appendBuilding(building, address, osmXml)
+
     if (len(addresses) > 0):
         for address in addresses:
             node = appendNewNode(address['geometry']['coordinates'], osmXml)
@@ -217,7 +228,7 @@ else:
             'osm/buildings-addresses-%s.osm' % matches[0])
 
 # profiling
-prW.disable()
-ps = pstats.Stats(prW)
-ps.sort_stats('time')
-a = ps.print_stats(10)
+# prW.disable()
+# ps = pstats.Stats(prW)
+# ps.sort_stats('time')
+# a = ps.print_stats(10)
