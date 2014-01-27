@@ -1,5 +1,7 @@
 all: buildings/buildings.shp addresses/addresses.shp districts/districts.shp chunks osm
 
+download: districts/districts.shp addresses/addresses.shp buildings/buildings.shp
+
 clean:
 	rm -f building_footprints_shape_09-13.zip
 	rm -f NYC_AddressPoint.zip
@@ -41,7 +43,7 @@ districts/districts.shp: districts
 	rm -f districts/districts.*
 	ogr2ogr -simplify 20 -t_srs EPSG:4326 -overwrite districts/districts.shp districts/nyedwi.shp
 
-chunks: directories
+chunks: directories addresses/addresses.shp buildings/buildings.shp districts/districts.shp
 	python chunk.py buildings/buildings.shp districts/districts.shp chunks/buildings-%s.shp ElectDist
 	python chunk.py addresses/addresses.shp districts/districts.shp chunks/addresses-%s.shp ElectDist
 
