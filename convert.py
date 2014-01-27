@@ -1,4 +1,9 @@
 # Convert NYC building footprints and addresses into importable OSM files.
+
+# profiling
+import cProfile
+import pstats
+
 from lxml import etree
 from lxml.etree import tostring
 from shapely.geometry import Point, LineString
@@ -7,6 +12,10 @@ from glob import glob
 from merge import merge
 import re
 from decimal import Decimal, getcontext
+
+# profiling
+prW = cProfile.Profile()
+prW.enable()
 
 # Converts given buildings into corresponding OSM XML files.
 def convert(buildings, osmOut):
@@ -164,7 +173,8 @@ def convert(buildings, osmOut):
         way.append(etree.Element('tag', k='building', v='yes'))
         if 'HEIGHT_ROO' in building['properties']:
             height = round(((building['properties']['HEIGHT_ROO'] * 12) * 0.0254), 1)
-            way.append(etree.Element('tag', k='height', v=str(height)))
+            if height > 0:
+                way.append(etree.Element('tag', k='height', v=str(height)))
         if 'BIN' in building['properties']:
             way.append(etree.Element('tag', k='nycdoitt:bin', v=str(building['properties']['BIN'])))
         if address: appendAddress(address, way)
@@ -205,3 +215,9 @@ else:
             merge(buildingFile,
                 'chunks/addresses-%s.shp' % matches[0]),
             'osm/buildings-addresses-%s.osm' % matches[0])
+
+# profiling
+prW.disable()
+ps = pstats.Stats(prW)
+ps.sort_stats('time')
+a = ps.print_stats(10)
