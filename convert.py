@@ -64,6 +64,7 @@ def convert(buildings, osmOut):
                 result['addr:housenumber'] = formatHousenumber(address)
             if address['STREET_NAM']:
                 streetname = address['STREET_NAM'].title()
+                streetname = streetname.replace('F D R', 'FDR')
                 # Expand Service Road
                 # See https://github.com/osmlab/nycbuildings/issues/30
                 streetname = re.sub(r"(.*)\bSr\b(.*)", r"\1Service Road\2", streetname)
