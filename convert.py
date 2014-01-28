@@ -86,6 +86,7 @@ def convert(buildings, osmOut):
                 streetname = re.sub(r"(.*)(\d*2)\s+(.*)", r"\1\2nd \3", streetname)
                 streetname = re.sub(r"(.*)(\d*3)\s+(.*)", r"\1\2rd \3", streetname)
                 streetname = re.sub(r"(.*)(\d+)\s+(.*)", r"\1\2th \3", streetname)
+                if streetname[0:3] == 'Ft ': streetname = 'Fort ' + streetname[3:]
                 result['addr:street'] = streetname
             if address['ZIPCODE']:
                 result['addr:postcode'] = str(int(address['ZIPCODE']))
