@@ -1,4 +1,10 @@
 # Convert NYC building footprints and addresses into importable OSM files.
+
+# profiling
+# import cProfile
+# import pstats
+# import sys
+
 from lxml import etree
 from lxml.etree import tostring
 from shapely.geometry import Point, LineString
@@ -7,6 +13,10 @@ from glob import glob
 from merge import merge
 import re
 from decimal import Decimal, getcontext
+
+# profiling
+# prW = cProfile.Profile()
+# prW.enable()
 
 # Converts given buildings into corresponding OSM XML files.
 def convert(buildings, osmOut):
@@ -36,13 +46,13 @@ def convert(buildings, osmOut):
                 addr = str(int(addr))
             if '-' in addr:
                 try:
-                    addr = str(int(addr.split('-')[0])) + '-' + str(int(addr.split('-')[1]))
+                    addr2 = addr.split('-')
+                    if len(addr2) == 2:
+                        addr = str(int(addr2[0])) + '-' + str(int(addr2[1])).zfill(2)
                 except:
                     pass
             return addr
         number = suffix(p['HOUSE_NUMB'], p['HOUSE_NU_1'], p['HYPHEN_TYP'])
-        if p['HOUSE_NU_2']:
-            number = number + ' - ' + suffix(p['HOUSE_NU_2'], p['HOUSE_NU_3'])
         return number
 
     # Converts an address
@@ -53,6 +63,7 @@ def convert(buildings, osmOut):
                 result['addr:housenumber'] = formatHousenumber(address)
             if address['STREET_NAM']:
                 streetname = address['STREET_NAM'].title()
+                streetname = streetname.replace('F D R ', 'FDR ')
                 # Expand Service Road
                 # See https://github.com/osmlab/nycbuildings/issues/30
                 streetname = re.sub(r"(.*)\bSr\b(.*)", r"\1Service Road\2", streetname)
@@ -75,6 +86,10 @@ def convert(buildings, osmOut):
                 streetname = re.sub(r"(.*)(\d*2)\s+(.*)", r"\1\2nd \3", streetname)
                 streetname = re.sub(r"(.*)(\d*3)\s+(.*)", r"\1\2rd \3", streetname)
                 streetname = re.sub(r"(.*)(\d+)\s+(.*)", r"\1\2th \3", streetname)
+                # Expand 'Ft' -> 'Fort'
+                if streetname[0:3] == 'Ft ': streetname = 'Fort ' + streetname[3:]
+                # Expand 'St ' -> 'Saint'
+                if streetname[0:3] == 'St ': streetname = 'Saint ' + streetname[3:]
                 result['addr:street'] = streetname
             if address['ZIPCODE']:
                 result['addr:postcode'] = str(int(address['ZIPCODE']))
@@ -164,7 +179,8 @@ def convert(buildings, osmOut):
         way.append(etree.Element('tag', k='building', v='yes'))
         if 'HEIGHT_ROO' in building['properties']:
             height = round(((building['properties']['HEIGHT_ROO'] * 12) * 0.0254), 1)
-            way.append(etree.Element('tag', k='height', v=str(height)))
+            if height > 0:
+                way.append(etree.Element('tag', k='height', v=str(height)))
         if 'BIN' in building['properties']:
             way.append(etree.Element('tag', k='nycdoitt:bin', v=str(building['properties']['BIN'])))
         if address: appendAddress(address, way)
@@ -179,7 +195,13 @@ def convert(buildings, osmOut):
             address = building['properties']['addresses'][0]
         else:
             addresses.extend(building['properties']['addresses'])
-        appendBuilding(building, address, osmXml)
+
+        if int(building['properties']['HEIGHT_ROO']) == 0:
+            if building['shape'].area > 1e-09:
+                appendBuilding(building, address, osmXml)
+        else:
+            appendBuilding(building, address, osmXml)
+
     if (len(addresses) > 0):
         for address in addresses:
             node = appendNewNode(address['geometry']['coordinates'], osmXml)
@@ -187,7 +209,7 @@ def convert(buildings, osmOut):
             
     with open(osmOut, 'w') as outFile:
         outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
-        print "Exported " + osmOut
+        print 'Exported ' + osmOut
 
 getcontext().prec = 16
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
@@ -205,3 +227,9 @@ else:
             merge(buildingFile,
                 'chunks/addresses-%s.shp' % matches[0]),
             'osm/buildings-addresses-%s.osm' % matches[0])
+
+# profiling
+# prW.disable()
+# ps = pstats.Stats(prW)
+# ps.sort_stats('time')
+# a = ps.print_stats(10)
