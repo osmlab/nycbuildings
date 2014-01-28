@@ -53,8 +53,6 @@ def convert(buildings, osmOut):
                     pass
             return addr
         number = suffix(p['HOUSE_NUMB'], p['HOUSE_NU_1'], p['HYPHEN_TYP'])
-        if p['HOUSE_NU_2']:
-            number = number + ' - ' + suffix(p['HOUSE_NU_2'], p['HOUSE_NU_3'])
         return number
 
     # Converts an address
@@ -207,7 +205,7 @@ def convert(buildings, osmOut):
             
     with open(osmOut, 'w') as outFile:
         outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
-        print "Exported " + osmOut
+        print 'Exported ' + osmOut
 
 getcontext().prec = 16
 # Run conversions. Expects an chunks/addresses-[district id].shp for each
