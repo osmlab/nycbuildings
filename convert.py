@@ -46,9 +46,9 @@ def convert(buildings, osmOut):
                 addr = str(int(addr))
             if '-' in addr:
                 try:
-                    addr = addr.split('-')
-                    if len(addr) == 2:
-                        addr = str(int(addr[0])) + '-' + str(int(addr[1])).zfill(2)
+                    addr2 = addr.split('-')
+                    if len(addr2) == 2:
+                        addr = str(int(addr2[0])) + '-' + str(int(addr2[1])).zfill(2)
                 except:
                     pass
             return addr
@@ -194,11 +194,9 @@ def convert(buildings, osmOut):
         else:
             addresses.extend(building['properties']['addresses'])
 
-        if len(building['shape'].exterior.coords) == 3:
-            if int(building['properties']['Shape_Area']) > 0:
+        if int(building['properties']['HEIGHT_ROO']) == 0:
+            if building['shape'].area > 1e-09:
                 appendBuilding(building, address, osmXml)
-            else:
-                print 'too small ' + building['properties']['BIN'] + ' for: ' + osmOut
         else:
             appendBuilding(building, address, osmXml)
 
