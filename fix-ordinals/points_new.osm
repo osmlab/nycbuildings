@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='2552836635' timestamp='2013-11-26T17:24:58Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.6221997' lon='-74.0259615' action='modify'>
+    <tag k='addr:housenumber' v='482 - 488'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='85th Street'/>
+  </node>
+  <node id='2552836641' timestamp='2013-11-26T17:24:58Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.622073' lon='-74.025344' action='modify'>
+    <tag k='addr:housenumber' v='501 - 511'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='85th Street'/>
+  </node>
+  <node id='2552836651' timestamp='2013-11-26T17:24:58Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.6226383' lon='-74.0251824' action='modify'>
+    <tag k='addr:housenumber' v='502 - 508'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='84th Street'/>
+  </node>
+  <node id='2552836661' timestamp='2013-11-26T17:24:58Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.6225677' lon='-74.0250655' action='modify'>
+    <tag k='addr:housenumber' v='510'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='84th Street'/>
+  </node>
+  <node id='2552836664' timestamp='2013-11-26T17:24:58Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.6225307' lon='-74.0250042' action='modify'>
+    <tag k='addr:housenumber' v='512'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='84th Street'/>
+  </node>
+  <node id='2552836792' timestamp='2013-11-26T17:25:00Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.6226696' lon='-74.0252551' action='modify'>
+    <tag k='addr:housenumber' v='8401'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='5th Avenue'/>
+  </node>
+  <node id='2552836798' timestamp='2013-11-26T17:25:00Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.6221741' lon='-74.0254561' action='modify'>
+    <tag k='addr:housenumber' v='8425'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='5th Avenue'/>
+  </node>
+  <node id='2552836811' timestamp='2013-11-26T17:25:00Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130509' lat='40.622117' lon='-74.0258655' action='modify'>
+    <tag k='addr:housenumber' v='8502'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='5th Avenue'/>
+  </node>
+  <node id='2552883641' timestamp='2013-11-26T17:51:13Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6223997' lon='-74.0258852' action='modify'>
+    <tag k='addr:housenumber' v='477 - 485'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='85th Street'/>
+  </node>
+  <node id='2552883660' timestamp='2013-11-26T17:51:14Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6228969' lon='-74.0256097' action='modify'>
+    <tag k='addr:housenumber' v='484'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='84th Street'/>
+  </node>
+  <node id='2552883664' timestamp='2013-11-26T17:51:14Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6227286' lon='-74.0249248' action='modify'>
+    <tag k='addr:housenumber' v='503'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='84th Street'/>
+  </node>
+  <node id='2552883665' timestamp='2013-11-26T17:51:14Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.622763' lon='-74.0249817' action='modify'>
+    <tag k='addr:housenumber' v='507'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='84th Street'/>
+  </node>
+  <node id='2552883671' timestamp='2013-11-26T17:51:14Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6229236' lon='-74.0226417' action='modify'>
+    <tag k='addr:housenumber' v='582 - 590'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='82nd Street'/>
+  </node>
+  <node id='2552883673' timestamp='2013-11-26T17:51:14Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6222023' lon='-74.0229533' action='modify'>
+    <tag k='addr:housenumber' v='582 - 590'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='83rd Street'/>
+  </node>
+  <node id='2552883676' timestamp='2013-11-26T17:51:14Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6223778' lon='-74.0228179' action='modify'>
+    <tag k='addr:housenumber' v='587 - 589'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='83rd Street'/>
+  </node>
+  <node id='2552883681' timestamp='2013-11-26T17:51:15Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6228691' lon='-74.0225762' action='modify'>
+    <tag k='addr:housenumber' v='8202'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='6th Avenue'/>
+  </node>
+  <node id='2552883687' action='modify' timestamp='2013-11-26T17:51:15Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6225221' lon='-74.0227121'>
+    <tag k='addr:housenumber' v='8218 - 8226'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='6th Avenue 15'/>
+  </node>
+  <node id='2552883694' timestamp='2013-11-26T17:51:15Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.62202' lon='-74.0229209' action='modify'>
+    <tag k='addr:housenumber' v='8302'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='6th Avenue'/>
+  </node>
+  <node id='2552883696' timestamp='2013-11-26T17:51:15Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6229007' lon='-74.0251587' action='modify'>
+    <tag k='addr:housenumber' v='8323'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='5th Avenue'/>
+  </node>
+  <node id='2552883698' timestamp='2013-11-26T17:51:15Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6228015' lon='-74.0250454' action='modify'>
+    <tag k='addr:housenumber' v='8325'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='5th Avenue'/>
+  </node>
+  <node id='2552883699' timestamp='2013-11-26T17:51:15Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6228249' lon='-74.0255298' action='modify'>
+    <tag k='addr:housenumber' v='8402'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='5th Avenue'/>
+  </node>
+  <node id='2552883701' timestamp='2013-11-26T17:51:16Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19130909' lat='40.6223245' lon='-74.0257369' action='modify'>
+    <tag k='addr:housenumber' v='8424'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='5th Avenue'/>
+  </node>
+  <node id='2552982003' timestamp='2013-11-26T18:58:53Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6228665' lon='-74.0221316' action='modify'>
+    <tag k='addr:housenumber' v='601 - 607'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='82nd Street'/>
+  </node>
+  <node id='2552982006' timestamp='2013-11-26T18:58:53Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6221262' lon='-74.0224164' action='modify'>
+    <tag k='addr:housenumber' v='601'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='83rd Street'/>
+  </node>
+  <node id='2552982018' timestamp='2013-11-26T18:58:53Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6226551' lon='-74.0221925' action='modify'>
+    <tag k='addr:housenumber' v='602'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='82nd Street'/>
+  </node>
+  <node id='2552982024' timestamp='2013-11-26T18:58:53Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6224595' lon='-74.0218871' action='modify'>
+    <tag k='addr:housenumber' v='624'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='82nd Street'/>
+  </node>
+  <node id='2552982125' timestamp='2013-11-26T18:58:55Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6229217' lon='-74.0221978' action='modify'>
+    <tag k='addr:housenumber' v='8125'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='6th Avenue'/>
+  </node>
+  <node id='2552982131' timestamp='2013-11-26T18:58:55Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6226963' lon='-74.0222881' action='modify'>
+    <tag k='addr:housenumber' v='8201'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='6th Avenue'/>
+  </node>
+  <node id='2552982135' timestamp='2013-11-26T18:58:55Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6224019' lon='-74.0218353'>
+    <tag k='addr:housenumber' v='8202 - 8204'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='Ft Hamilton Parkway'/>
+  </node>
+  <node id='2552982138' timestamp='2013-11-26T18:58:55Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6221457' lon='-74.022214'>
+    <tag k='addr:housenumber' v='8214 - 8224'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='Ft Hamilton Parkway'/>
+  </node>
+  <node id='2552982142' action='modify' timestamp='2013-11-26T18:58:55Z' uid='1815736' user='ediyes_nycbuildings' visible='true' version='1' changeset='19132090' lat='40.6222973' lon='-74.0224627'>
+    <tag k='addr:housenumber' v='8215 - 8225'/>
+    <tag k='addr:postcode' v='11209'/>
+    <tag k='addr:street' v='6th Avenue and 7 Street'/>
+  </node>
+</osm>
