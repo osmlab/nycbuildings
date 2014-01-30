@@ -90,6 +90,10 @@ def convert(buildings, osmOut):
                 if streetname[0:3] == 'Ft ': streetname = 'Fort ' + streetname[3:]
                 # Expand 'St ' -> 'Saint'
                 if streetname[0:3] == 'St ': streetname = 'Saint ' + streetname[3:]
+                # Expand middlename ' St John' fix
+                streetname = streetname.replace('St John', 'Saint John')
+                # Expand middlename ' St ' fix
+                streetname = streetname.replace(' St ', ' Street ')
                 result['addr:street'] = streetname
             if address['ZIPCODE']:
                 result['addr:postcode'] = str(int(address['ZIPCODE']))
