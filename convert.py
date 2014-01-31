@@ -8,11 +8,12 @@
 from lxml import etree
 from lxml.etree import tostring
 from shapely.geometry import Point, LineString
-from sys import argv
+from sys import argv, exit
 from glob import glob
 from merge import merge
 import re
 from decimal import Decimal, getcontext
+from multiprocessing import Pool
 
 # profiling
 # prW = cProfile.Profile()
@@ -219,22 +220,29 @@ def convert(buildings, osmOut):
         outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         print 'Exported ' + osmOut
 
-getcontext().prec = 16
-# Run conversions. Expects an chunks/addresses-[district id].shp for each
-# chunks/buildings-[district id].shp. Optinally convert only one election district.
-if (len(argv) == 2):
+def prep(fil3):
+    matches = re.match('^.*-(\d+)\.shp$', fil3).groups(0)
     convert(
-        merge('chunks/buildings-%s.shp' % argv[1],
-            'chunks/addresses-%s.shp' % argv[1]),
-        'osm/buildings-addresses-%s.osm' % argv[1])
-else:
-    buildingFiles = glob("chunks/buildings-*.shp")
-    for buildingFile in buildingFiles:
-        matches = re.match('^.*-(\d+)\.shp$', buildingFile).groups(0)
-        convert(
-            merge(buildingFile,
-                'chunks/addresses-%s.shp' % matches[0]),
+        merge(fil3, 'chunks/addresses-%s.shp' % matches[0]),
             'osm/buildings-addresses-%s.osm' % matches[0])
+
+
+if __name__ == '__main__':
+    getcontext().prec = 16
+    # Run conversions. Expects an chunks/addresses-[district id].shp for each
+    # chunks/buildings-[district id].shp. Optinally convert only one election district.
+    if (len(argv) == 2):
+        convert(
+            merge('chunks/buildings-%s.shp' % argv[1],
+                'chunks/addresses-%s.shp' % argv[1]),
+            'osm/buildings-addresses-%s.osm' % argv[1])
+    else:
+        buildingFiles = glob("chunks/buildings-*.shp")
+
+        pool = Pool()
+        pool.map(prep, buildingFiles)
+        pool.close()
+        pool.join()
 
 # profiling
 # prW.disable()
