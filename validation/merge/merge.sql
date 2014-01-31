@@ -28,12 +28,8 @@ CREATE FUNCTION contains() RETURNS void AS $$
 				END IF;
 			END LOOP;
 		END LOOP;
-		
-        --Removes Ways with 2+ nodes
-		RAISE NOTICE 'DETERMINING UNIQUE RESULTS';
-		INSERT INTO building_merge SELECT DISTINCT geom FROM building_contains;
-		RAISE NOTICE 'PROCESSING COMPLETE';
 END;
 $$ LANGUAGE plpgsql;
 
 SELECT contains();
+INSERT INTO final_geom SELECT DISTINCT geom FROM merge_geom;
