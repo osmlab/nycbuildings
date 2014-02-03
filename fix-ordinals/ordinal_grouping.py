@@ -1,11 +1,10 @@
 from sys import argv, exit
 import xml.parsers.expat
+import datetime
 
 # argv[1] = filename
 # argv[2] = changeset
     # osmchange need to be tagged with the open changeset the file is going in
-
-# stretch, both osmchange and modified osm
 
 def ordinal(n):
     n = int(n)
@@ -34,64 +33,124 @@ def ordinalize(street):
 def start_element(name, attrs):
     if name in accepted:
         global current
-        current = {
-            'name': name,
-            'attrs': attrs,
-            'tags': [],
-            'nds': [],
-            'modified': False
-        }
+        if (int(attrs['timestamp'][0:4]) > 2012 and
+            int(attrs['timestamp'][5:7]) > 9):
+            current = {
+                'type': name,
+                'attrs': attrs,
+                'tags': {},
+                'nds': [],
+                'modified': False
+            }
 
-    if name == 'nd':
+            if name == 'relation':
+                global relations
+                relations.append(attrs['id'])
+        else:
+            current = False
+
+    if name == 'nd' and current:
         global current
-        current['nds'].append(attrs)
+        # need to see this in actual use
+        current['nds'].append(attrs['ref'])
 
-    if name == 'tag':
+    if name == 'tag' and current:
         tag(attrs)
 
 
 def tag(attrs):
     global current
-    current['tags'].append(attrs)
-    print current
+    for attr in attrs:
+        current['tags'][attrs['k']] = attrs['v']
 
     if attrs['k'] == 'addr:street':
         current['tags']['addr:street'] = ordinalize(attrs['v'])
         if current['tags']['addr:street'] != attrs['v']:
+            # print attrs['v'] + ' -> ' + current['tags']['addr:street']
             current['modified'] = True
-            current['version'] = str(int(current['version']) + 1)
+            current['attrs']['version'] = str(int(current['attrs']['version']) + 1)
 
 
 def end_element(name):
     if name == 'osm':
-        global out
-        out += '</modify></osmChange>'
-        print out
+        closeFile()
 
     if name in accepted:
-        if current['modified']:
-            global count
-            count += 1
-            addToFile(current, 'ordinal_fixed_' + count + '.osc')
-            sys.exit(1)
+        if current and current['modified']:
+            addToFile(current)
 
 
-def addToFile(item, filename):
-    print item
-    print filename
+def startOsmChange():
+    return '<osmChange version="0.6" generator="ordinal_fixes.py"><modify>'
 
 
+def endOsmChange():
+    return '</modify></osmChange>'
+
+
+def addToFile(item):
+    global itemCount
+    if itemCount > groupLimit:
+        if type(currentFile) is file:
+            closeFile()
+        newFile()
+        itemCount = 0
+    
+    # need to serialize back to xml
+    if len(item['nds']):
+        print item
+
+    currentFile.write(serializeItem(item) + '\n')
+    # currentFile.write(str(itemCount) + '\n')
+    itemCount += 1
+
+
+def serializeItem(item):
+    xml = '<' + item['type']
+    
+    for attr in item['attrs']:
+        xml += ' ' + attr + '="' + item['attrs'][attr] + '"'
+    xml += '>'
+
+    for tag in item['tags']:
+        xml += '<tag k="' + tag + '" v="' + item['tags'][tag] + '"/>'
+
+    xml += '</' + item['type'] + '>'
+    return xml
+
+
+def newFile():
+    global fileCount
+    fileCount += 1
+    global currentFile
+    currentFile = open('ordinal_fixed_' + str(fileCount) + '.osc', 'w')
+    currentFile.write(startOsmChange())
+    print 'created file: ' + 'ordinal_fixed_' + str(fileCount) + '.osc'
+
+
+def closeFile():
+    currentFile.write(endOsmChange())
+    currentFile.close()
+
+
+groupLimit = 2500
 current = {}
-out = '<osmChange version="0.6" generator="ordinal_fixes.py"><modify>'
-# changeset = argv[2]
+currentFile = False
+out = ''
 accepted = ['node', 'way', 'relation']
-count = 0
+itemCount = groupLimit + 1
+fileCount = 0
+relations = []
+
 
 p = xml.parsers.expat.ParserCreate()
 p.StartElementHandler = start_element
 p.EndElementHandler = end_element
-
 p.ParseFile(open(argv[1], 'r'))
+
+print '---------------'
+print '---------------'
+print relations
 
 
 # save the entire structure of an object until the end of the element
