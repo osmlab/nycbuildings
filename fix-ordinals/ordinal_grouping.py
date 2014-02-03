@@ -42,10 +42,6 @@ def start_element(name, attrs):
                 'nds': [],
                 'modified': False
             }
-
-            if name == 'relation':
-                global relations
-                relations.append(attrs['id'])
         else:
             current = False
 
@@ -66,9 +62,15 @@ def tag(attrs):
     if attrs['k'] == 'addr:street':
         current['tags']['addr:street'] = ordinalize(attrs['v'])
         if current['tags']['addr:street'] != attrs['v']:
-            # print attrs['v'] + ' -> ' + current['tags']['addr:street']
-            current['modified'] = True
-            current['attrs']['version'] = str(int(current['attrs']['version']) + 1)
+            if current['type'] == 'relation':
+                # not going to build out relations right now
+                # do them manually
+                global relations
+                relations.append(current['attrs']['id'])
+                current = False
+            else:
+                # print attrs['v'] + ' -> ' + current['tags']['addr:street']
+                current['modified'] = True
 
 
 def end_element(name):
@@ -90,18 +92,13 @@ def endOsmChange():
 
 def addToFile(item):
     global itemCount
-    if itemCount > groupLimit:
+    if itemCount >= groupLimit:
         if type(currentFile) is file:
             closeFile()
         newFile()
         itemCount = 0
-    
-    # need to serialize back to xml
-    if len(item['nds']):
-        print item
 
     currentFile.write(serializeItem(item) + '\n')
-    # currentFile.write(str(itemCount) + '\n')
     itemCount += 1
 
 
@@ -109,13 +106,19 @@ def serializeItem(item):
     xml = '<' + item['type']
     
     for attr in item['attrs']:
-        xml += ' ' + attr + '="' + item['attrs'][attr] + '"'
+        if attr not in ['timestamp', 'user', 'uid', 'changeset', 'visible']:
+            xml += ' ' + attr + '="' + item['attrs'][attr] + '"'
     xml += '>'
+
+    if item['type'] == 'way':
+        for nd in item['nds']:
+            xml += '<nd ' + 'ref="' + nd + '"/>'
 
     for tag in item['tags']:
         xml += '<tag k="' + tag + '" v="' + item['tags'][tag] + '"/>'
 
     xml += '</' + item['type'] + '>'
+
     return xml
 
 
@@ -125,7 +128,7 @@ def newFile():
     global currentFile
     currentFile = open('ordinal_fixed_' + str(fileCount) + '.osc', 'w')
     currentFile.write(startOsmChange())
-    print 'created file: ' + 'ordinal_fixed_' + str(fileCount) + '.osc'
+    print str(groupLimit * fileCount) + ' items'
 
 
 def closeFile():
@@ -133,7 +136,7 @@ def closeFile():
     currentFile.close()
 
 
-groupLimit = 2500
+groupLimit = 2000
 current = {}
 currentFile = False
 out = ''
@@ -148,7 +151,6 @@ p.StartElementHandler = start_element
 p.EndElementHandler = end_element
 p.ParseFile(open(argv[1], 'r'))
 
-print '---------------'
 print '---------------'
 print relations
 
