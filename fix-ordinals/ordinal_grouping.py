@@ -3,6 +3,7 @@ import xml.parsers.expat
 
 
 def ordinal(n):
+    # actually adding the ordinals to numbers
     n = int(n)
     if 10 <= n % 100 < 20:
         return str(n) + 'th'
@@ -11,6 +12,8 @@ def ordinal(n):
 
 
 def ordinalize(street):
+    # searches, character by character, for numbers in a string
+    # adds an ordinal if it comes across any
     for index, char in enumerate(street):
         if char.isdigit():
             start = index
@@ -27,6 +30,7 @@ def ordinalize(street):
 
 
 def start_element(name, attrs):
+    # parsing the xml nodes we're interested in
     if name in accepted:
         global current
         if (int(attrs['timestamp'][0:4]) > 2012 and
@@ -50,6 +54,7 @@ def start_element(name, attrs):
 
 
 def tag(attrs):
+    # modifing the addr:street tags we want
     global current
     for attr in attrs:
         current['tags'][attrs['k']] = attrs['v']
@@ -69,6 +74,7 @@ def tag(attrs):
 
 
 def end_element(name):
+    # appropriate actions for closing xml nodes we used
     if name == 'osm':
         closeFile()
 
@@ -93,11 +99,11 @@ def addToFile(item):
         newFile()
         itemCount = 0
 
-    currentFile.write(serializeItem(item) + '\n')
+    currentFile.write(xmlizeItem(item) + '\n')
     itemCount += 1
 
 
-def serializeItem(item):
+def xmlizeItem(item):
     xml = '<' + item['type']
     
     for attr in item['attrs']:
@@ -146,6 +152,8 @@ p.StartElementHandler = start_element
 p.EndElementHandler = end_element
 p.ParseFile(open(argv[1], 'r'))
 
+# list of relations that needs to be fixed manually
+# there's not many, quicker to just do it than get clever about it
 print '---------------'
 print 'relations:'
 print relations
