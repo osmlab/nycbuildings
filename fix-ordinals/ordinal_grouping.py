@@ -1,10 +1,6 @@
-from sys import argv, exit
+from sys import argv
 import xml.parsers.expat
-import datetime
 
-# argv[1] = filename
-# argv[2] = changeset
-    # osmchange need to be tagged with the open changeset the file is going in
 
 def ordinal(n):
     n = int(n)
@@ -47,7 +43,6 @@ def start_element(name, attrs):
 
     if name == 'nd' and current:
         global current
-        # need to see this in actual use
         current['nds'].append(attrs['ref'])
 
     if name == 'tag' and current:
@@ -152,9 +147,5 @@ p.EndElementHandler = end_element
 p.ParseFile(open(argv[1], 'r'))
 
 print '---------------'
+print 'relations:'
 print relations
-
-
-# save the entire structure of an object until the end of the element
-# save a list of all used nodes in a particular group
-# ability to create arbitrarily group sizes, based on count
