@@ -3,7 +3,6 @@
 from fiona import collection
 from rtree import index
 from shapely.geometry import asShape, Point, LineString
-from shapely import speedups
 
 def merge(buildingIn, addressIn):
     addresses = []
