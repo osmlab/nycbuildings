@@ -49,7 +49,11 @@ chunks: directories addresses/addresses.shp buildings/buildings.shp districts/di
 
 directories:
 	mkdir -p chunks
+	mkdir -p merged
 	mkdir -p osm
+
+merged: directories
+	python merge.py
 
 osm: chunks
 	python convert.py
