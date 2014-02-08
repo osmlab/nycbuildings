@@ -1,5 +1,4 @@
 # Merge addresses into buildings they intersect with
-
 from fiona import collection
 from rtree import index
 from shapely.geometry import asShape, Point, LineString
