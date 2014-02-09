@@ -56,4 +56,4 @@ merged: directories
 	python merge.py
 
 osm: chunks
-	python convert.py
+	python convert.py merged/*
