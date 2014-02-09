@@ -1,4 +1,4 @@
-all: buildings/buildings.shp addresses/addresses.shp districts/districts.shp chunks osm
+all: buildings/buildings.shp addresses/addresses.shp districts/districts.shp chunks merged osm
 
 download: districts/districts.shp addresses/addresses.shp buildings/buildings.shp
 
@@ -55,5 +55,5 @@ directories:
 merged: directories
 	python merge.py
 
-osm: chunks
+osm: merged
 	python convert.py merged/*
