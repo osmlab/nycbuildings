@@ -1,28 +1,36 @@
 # Convert NYC building footprints and addresses into importable OSM files.
 
 # profiling
-# import cProfile
-# import pstats
-# import sys
+import cProfile
+import pstats
+import sys
 
 from lxml import etree
 from lxml.etree import tostring
-from shapely.geometry import Point, LineString
-from sys import argv, exit
+from shapely.geometry import asShape, Point, LineString
+from sys import argv, exit, stderr
 from glob import glob
 from merge import merge
 import re
 from decimal import Decimal, getcontext
 from multiprocessing import Pool
+import json
+from rtree import index
+import ntpath
 
-# profiling
-# prW = cProfile.Profile()
-# prW.enable()
+# Adjust precision for buffer operations
+getcontext().prec = 16
 
 # Converts given buildings into corresponding OSM XML files.
-def convert(buildings, osmOut):
-    buildingIdx = buildings['index']
-    buildings = buildings['buildings']
+def convert(buildingsFile, osmOut):
+    with open(buildingsFile) as f:
+        buildings = json.load(f)
+    buildingShapes = []
+    buildingIdx = index.Index()
+    for building in buildings:
+        shape = asShape(building['geometry'])
+        buildingShapes.append(shape)
+        buildingIdx.add(len(buildings) - 1, shape.bounds)
 
     # Generates a new osm id.
     osmIds = dict(node = -1, way = -1, rel = -1)
@@ -154,28 +162,28 @@ def convert(buildings, osmOut):
             element.append(etree.Element('tag', k=k, v=v))
 
     # Appends a building to a given OSM xml document.
-    def appendBuilding(building, address, osmXml):
+    def appendBuilding(building, shape, address, osmXml):
         # Check for intersecting buildings
         intersects = []
-        for i in buildingIdx.intersection(building['shape'].bounds):
+        for i in buildingIdx.intersection(shape.bounds):
             try:
-                for c in buildings[i]['shape'].exterior.coords:
-                    if Point(c[0], c[1]).buffer(0.000001).intersects(building['shape']):
+                for c in buildingShapes[i].exterior.coords:
+                    if Point(c[0], c[1]).buffer(0.000001).intersects(shape):
                         intersects.append(c)
             except AttributeError:
-                for c in buildings[i]['shape'][0].exterior.coords:
-                    if Point(c[0], c[1]).buffer(0.000001).intersects(building['shape']):
+                for c in buildingShapes[i][0].exterior.coords:
+                    if Point(c[0], c[1]).buffer(0.000001).intersects(shape):
                         intersects.append(c)
-        
+
         # Export building, create multipolygon if there are interior shapes.
         interiors = []
         try:
-            way = appendNewWay(list(building['shape'].exterior.coords), intersects, osmXml)
-            for interior in building['shape'].interiors:
+            way = appendNewWay(list(shape.exterior.coords), intersects, osmXml)
+            for interior in shape.interiors:
                 interiors.append(appendNewWay(list(interior.coords), [], osmXml))
         except AttributeError:
-            way = appendNewWay(list(building['shape'][0].exterior.coords), intersects, osmXml)
-            for interior in building['shape'][0].interiors:
+            way = appendNewWay(list(shape[0].exterior.coords), intersects, osmXml)
+            for interior in shape[0].interiors:
                 interiors.append(appendNewWay(list(interior.coords), [], osmXml))
         if len(interiors) > 0:
             relation = etree.Element('relation', visible='true', id=str(newOsmId('way')))
@@ -198,54 +206,34 @@ def convert(buildings, osmOut):
     # one address per building. Export remaining addresses as individual nodes.
     addresses = []
     osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
-    for building in buildings:
+    for i in range(0, len(buildings)):
         address = None
-        if len(building['properties']['addresses']) == 1:
-            address = building['properties']['addresses'][0]
+        if len(buildings[i]['properties']['addresses']) == 1:
+            address = buildings[i]['properties']['addresses'][0]
         else:
-            addresses.extend(building['properties']['addresses'])
+            addresses.extend(buildings[i]['properties']['addresses'])
 
-        if int(building['properties']['HEIGHT_ROO']) == 0:
-            if building['shape'].area > 1e-09:
-                appendBuilding(building, address, osmXml)
+        if int(buildings[i]['properties']['HEIGHT_ROO']) == 0:
+            if shape.area > 1e-09:
+                appendBuilding(buildings[i], buildingShapes[i], address, osmXml)
         else:
-            appendBuilding(building, address, osmXml)
+            appendBuilding(buildings[i], buildingShapes[i], address, osmXml)
 
     if (len(addresses) > 0):
         for address in addresses:
             node = appendNewNode(address['geometry']['coordinates'], osmXml)
             appendAddress(address, node)
-            
+
     with open(osmOut, 'w') as outFile:
         outFile.writelines(tostring(osmXml, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         print 'Exported ' + osmOut
 
 def prep(fil3):
-    matches = re.match('^.*-(\d+)\.shp$', fil3).groups(0)
-    convert(
-        merge(fil3, 'chunks/addresses-%s.shp' % matches[0]),
-            'osm/buildings-addresses-%s.osm' % matches[0])
-
+    matches = re.match('^(.*)\..*?$', ntpath.basename(fil3)).groups(0)
+    convert(fil3, 'osm/%s.osm' % matches[0])
 
 if __name__ == '__main__':
-    getcontext().prec = 16
-    # Run conversions. Expects an chunks/addresses-[district id].shp for each
-    # chunks/buildings-[district id].shp. Optinally convert only one election district.
-    if (len(argv) == 2):
-        convert(
-            merge('chunks/buildings-%s.shp' % argv[1],
-                'chunks/addresses-%s.shp' % argv[1]),
-            'osm/buildings-addresses-%s.osm' % argv[1])
-    else:
-        buildingFiles = glob("chunks/buildings-*.shp")
-
-        pool = Pool()
-        pool.map(prep, buildingFiles)
-        pool.close()
-        pool.join()
-
-# profiling
-# prW.disable()
-# ps = pstats.Stats(prW)
-# ps.sort_stats('time')
-# a = ps.print_stats(10)
+    pool = Pool()
+    pool.map(prep, argv[1:])
+    pool.close()
+    pool.join()
