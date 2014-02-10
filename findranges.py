@@ -1,3 +1,4 @@
+# Tally range-style addresses on a per address file level.
 from sys import argv
 from glob import glob
 from merge import merge
