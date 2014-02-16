@@ -2,10 +2,11 @@
 // See https://github.com/osmlab/nycbuildings/issues/35
 // node 0.10.x
 // Usage:
-// node historicaddresses.js merged/* > historicaddresses.csv
+// ulimit -n 7000 # set ulimit high enough to read all files
+// node validation/historicaddresses.js merged/* > historicaddresses.csv
 var fs = require('fs');
 
-console.log('address,lng,lat');
+console.log('address,specialcode,lng,lat');
 process.argv.splice(2).forEach(function(file) {
     fs.readFile(file, function(err, data) {
         if (err) {
@@ -35,11 +36,12 @@ process.argv.splice(2).forEach(function(file) {
                     }
                 });
                 if (queens > 0 && notQueens > 0) {
-                    addresses.forEach(function(address) {
+                    addresses.forEach(function(a) {
                         console.log(
-                            address.properties['STREET_NAM'] + ' ' + address.properties['HOUSE_NUMB'] + ',' + 
-                            address.geometry.coordinates[0] + ',' + 
-                            address.geometry.coordinates[1]
+                            a.properties['STREET_NAM'] + ' ' + a.properties['HOUSE_NUMB'] + ',' +
+                            a.properties['SPECIAL_CO'] + ',' +
+                            a.geometry.coordinates[0] + ',' +
+                            a.geometry.coordinates[1]
                         );
                     });
                 }
