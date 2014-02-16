@@ -204,14 +204,20 @@ def convert(buildingsFile, osmOut):
 
     # Export buildings & addresses. Only export address with building if there is exactly
     # one address per building. Export remaining addresses as individual nodes.
-    addresses = []
+    allAddresses = []
     osmXml = etree.Element('osm', version='0.6', generator='alex@mapbox.com')
     for i in range(0, len(buildings)):
+
+        # Filter out special addresses categories A and B
+        buildingAddresses = []
+        for address in buildings[i]['properties']['addresses']:
+            if address['properties']['SPECIAL_CO'] not in ['A', 'B']:
+                buildingAddresses.append(address)
         address = None
-        if len(buildings[i]['properties']['addresses']) == 1:
-            address = buildings[i]['properties']['addresses'][0]
+        if len(buildingAddresses) == 1:
+            address = buildingAddresses[0]
         else:
-            addresses.extend(buildings[i]['properties']['addresses'])
+            allAddresses.extend(buildingAddresses)
 
         if int(buildings[i]['properties']['HEIGHT_ROO']) == 0:
             if shape.area > 1e-09:
@@ -219,8 +225,9 @@ def convert(buildingsFile, osmOut):
         else:
             appendBuilding(buildings[i], buildingShapes[i], address, osmXml)
 
-    if (len(addresses) > 0):
-        for address in addresses:
+    # Export any addresses that aren't the only address for a building.
+    if (len(allAddresses) > 0):
+        for address in allAddresses:
             node = appendNewNode(address['geometry']['coordinates'], osmXml)
             appendAddress(address, node)
 
