@@ -1,0 +1,13 @@
+{
+  "name": "osmlab-nycbuildings-validation",
+  "version": "0.0.1",
+  "author": "Alex Barth <alex@mapbox.com>",
+  "description": "Various validation scripts",
+  "dependencies" : {
+    "underscore": "1.6.0"
+  },
+  "license": "BSD",
+  "engines": {
+    "node": ">=0.8"
+  }
+}
