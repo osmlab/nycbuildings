@@ -1,3 +1,5 @@
+# usage: python padding-fix.py {{.osmfile}}
+
 from sys import argv
 import xml.parsers.expat
 
@@ -13,17 +15,13 @@ def start_element(name, attrs):
     # parsing the xml nodes we're interested in
     if name in accepted:
         global current
-        if (int(attrs['timestamp'][0:4]) > 2012 and
-            int(attrs['timestamp'][5:7]) > 9):
-            current = {
-                'type': name,
-                'attrs': attrs,
-                'tags': {},
-                'nds': [],
-                'modified': False
-            }
-        else:
-            current = False
+        current = {
+            'type': name,
+            'attrs': attrs,
+            'tags': {},
+            'nds': [],
+            'modified': False
+        }
 
     if name == 'nd' and current:
         global current
@@ -112,9 +110,11 @@ def newFile():
 
 
 def closeFile():
-    currentFile.write(endOsmChange())
-    currentFile.close()
-
+    if currentFile:
+        currentFile.write(endOsmChange())
+        currentFile.close()
+    else:
+        print 'nothing changed, nothing changes, you must be the change'
 
 groupLimit = 2500
 current = {}
