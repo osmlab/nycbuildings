@@ -79,7 +79,7 @@ You can run stages separately, like so:
 
     # For testing it's useful to convert just a single district.
     # For instance, convert election district 65001:
-    python convert.py 65001
+    python convert.py merged/buildings-addresses-65001.geojson
 
 
 ## Features
