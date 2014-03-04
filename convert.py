@@ -1,10 +1,4 @@
 # Convert NYC building footprints and addresses into importable OSM files.
-
-# profiling
-import cProfile
-import pstats
-import sys
-
 from lxml import etree
 from lxml.etree import tostring
 from shapely.geometry import asShape, Point, LineString
