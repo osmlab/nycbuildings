@@ -24,7 +24,7 @@ def convert(buildingsFile, osmOut):
     for building in buildings:
         shape = asShape(building['geometry'])
         buildingShapes.append(shape)
-        buildingIdx.add(len(buildings) - 1, shape.bounds)
+        buildingIdx.add(len(buildingShapes) - 1, shape.bounds)
 
     # Generates a new osm id.
     osmIds = dict(node = -1, way = -1, rel = -1)
