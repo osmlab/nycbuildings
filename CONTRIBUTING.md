@@ -1,11 +1,12 @@
 Contributing to the New York City Building and Address Import
 =============================================================
 
-You probably landed here not because you'd like to contribute code to the
-nycbuildings repository, but because you're interested in participating in
-the import itself.
+Repository to manage conversion code for NYC building and address import in OpenStreetMap and to deal with data problems.
 
-Refer to import guidelines here: https://github.com/osmlab/nycbuildings/wiki
+Before posting, familiarize yourself with [the wiki detailing upload workflow and rules](https://github.com/osmlab/nycbuildings/wiki) and [the README](https://github.com/osmlab/nycbuildings) explaining the conversion script.
 
-Looking to contribute code? Looking forward to your pull request :)
+File an issue here if you:
 
+1. Would like to participate in importing data in OpenStreetMap
+2. Have a question about data quality (file with links to OSM and screenshots)
+3. Found a bug or have an improvement for the conversion script
