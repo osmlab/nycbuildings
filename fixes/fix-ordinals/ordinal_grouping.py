@@ -33,17 +33,13 @@ def start_element(name, attrs):
     # parsing the xml nodes we're interested in
     if name in accepted:
         global current
-        if (int(attrs['timestamp'][0:4]) > 2012 and
-            int(attrs['timestamp'][5:7]) > 9):
-            current = {
-                'type': name,
-                'attrs': attrs,
-                'tags': {},
-                'nds': [],
-                'modified': False
-            }
-        else:
-            current = False
+        current = {
+            'type': name,
+            'attrs': attrs,
+            'tags': {},
+            'nds': [],
+            'modified': False
+        }
 
     if name == 'nd' and current:
         global current
