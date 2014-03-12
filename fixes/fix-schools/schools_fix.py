@@ -54,12 +54,12 @@ def tag(attrs):
     global bandera  
     for attr in attrs:
         current['tags'][attrs['k']] = attrs['v']
-    if attrs['k']=='amenity' and attrs['v']=='school':
-        bandera=True
-    if attrs['k'] == 'building' and attrs['v']=='yes' and bandera:
+    if attrs['k'] == 'amenity' and attrs['v'] == 'school':
+        bandera = True
+    if attrs['k'] == 'building' and attrs['v'] == 'yes' and bandera:
         current['tags'][attrs['k']] = 'school'   	
         current['modified'] = True
-        bandera=False
+        bandera = False
 
 
 def end_element(name):
@@ -70,7 +70,7 @@ def end_element(name):
     if name in accepted:
         if current and current['modified']:
             addToFile(current)
-            print current
+            #print current
 
 
 def startOsmChange():
