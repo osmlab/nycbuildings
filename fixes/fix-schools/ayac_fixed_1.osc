@@ -1,0 +1,7 @@
+<osmChange version="0.6" generator="ordinal_fixes.py"><modify><way version="8" id="158623074"><nd ref="1707853873"/><nd ref="1707853879"/><nd ref="1707853880"/><nd ref="1707853875"/><nd ref="1707853873"/><tag k="building" v="school"/></way>
+<way version="12" id="158623076"><nd ref="1707853877"/><nd ref="1707853881"/><nd ref="1707853883"/><nd ref="1707853882"/><nd ref="1707853877"/><tag k="building" v="school"/><tag k="amenity" v="school"/><tag k="name" v="A"/></way>
+<way version="10" id="158623080"><nd ref="1707853836"/><nd ref="1707853835"/><nd ref="1707853854"/><nd ref="1707853856"/><nd ref="1707853859"/><nd ref="1707853852"/><nd ref="1707853837"/><nd ref="1707853836"/><tag k="building" v="school"/><tag k="amenity" v="school"/></way>
+<way version="9" id="158623081"><nd ref="1707853839"/><nd ref="1707853865"/><nd ref="1707853871"/><nd ref="1707853872"/><nd ref="1707853841"/><nd ref="1707853840"/><nd ref="1707853839"/><tag k="building" v="school"/><tag k="amenity" v="school"/></way>
+<way version="9" id="158623083"><nd ref="1707853838"/><nd ref="1707853833"/><nd ref="1707853836"/><nd ref="1707853837"/><nd ref="1707853839"/><nd ref="1707853840"/><nd ref="1707853838"/><tag k="building" v="school"/><tag k="amenity" v="school"/></way>
+<way version="9" id="158623084"><nd ref="1707853871"/><nd ref="1707853878"/><nd ref="1707853869"/><nd ref="1707853858"/><nd ref="1707853859"/><nd ref="1707853852"/><nd ref="1707853865"/><nd ref="1707853871"/><tag k="building" v="school"/><tag k="amenity" v="school"/></way>
+</modify></osmChange>
