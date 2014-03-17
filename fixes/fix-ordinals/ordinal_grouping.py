@@ -53,7 +53,7 @@ def tag(attrs):
     # modifing the addr:street tags we want
     global current
     for attr in attrs:
-        current['tags'][attrs['k']] = attrs['v']
+        current['tags'][attrs['k']] = escape(attrs['v'], True)
 
     if attrs['k'] == 'addr:street':
         current['tags']['addr:street'] = ordinalize(attrs['v'])
@@ -143,7 +143,7 @@ fileCount = 0
 relations = []
 
 
-p = xml.parsers.expat.ParserCreate()
+p = xml.parsers.expat.ParserCreate('utf-8')
 p.StartElementHandler = start_element
 p.EndElementHandler = end_element
 p.ParseFile(open(argv[1], 'r'))
