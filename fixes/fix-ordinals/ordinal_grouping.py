@@ -1,5 +1,6 @@
 from sys import argv
 import xml.parsers.expat
+from cgi import escape
 
 
 def ordinal(n):
@@ -100,6 +101,7 @@ def addToFile(item):
 
 
 def xmlizeItem(item):
+    # write the xml
     xml = '<' + item['type']
     
     for attr in item['attrs']:
