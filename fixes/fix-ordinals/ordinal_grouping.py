@@ -5,16 +5,22 @@ from cgi import escape
 
 def ordinal(n):
     # actually adding the ordinals to numbers
-    n = int(n)
-    if 10 <= n % 100 < 20:
-        return str(n) + 'th'
-    else:
-       return  str(n) + {1 : 'st', 2 : 'nd', 3 : 'rd'}.get(n % 10, 'th')
+    try:
+        n = int(n)
+        if 10 <= n % 100 < 20:
+            return str(n) + 'th'
+        else:
+           return  str(n) + {1 : 'st', 2 : 'nd', 3 : 'rd'}.get(n % 10, 'th')
+    except:
+        print 'screwy number: ' + n
+        print type(a)
+        return n
 
 
 def ordinalize(street):
     # searches, character by character, for numbers in a string
     # adds an ordinal if it comes across any
+    OGstreet = street
     for index, char in enumerate(street):
         if char.isdigit():
             start = index
@@ -24,8 +30,11 @@ def ordinalize(street):
                 end += 1
             number = street[start:end]
 
-            if street[start+end:end+1].isspace():
-                street = ordinal(number) + street[0:start] + street[end:]
+            before = street[0:start]
+            after = street[end:]
+
+            if street[end:end+1].isspace():
+                street = before + ordinal(number) + after
 
     return street
 
@@ -47,7 +56,10 @@ def start_element(name, attrs):
         current['nds'].append(attrs['ref'])
 
     if name == 'tag' and current:
-        tag(attrs)
+        try:
+            tag(attrs)
+        except:
+            print current
 
 
 def tag(attrs):
@@ -66,7 +78,6 @@ def tag(attrs):
                 relations.append(current['attrs']['id'])
                 current = False
             else:
-                # print attrs['v'] + ' -> ' + current['tags']['addr:street']
                 current['modified'] = True
 
 
@@ -77,7 +88,9 @@ def end_element(name):
 
     if name in accepted:
         if current and current['modified']:
-            addToFile(current)
+            if current['attrs']['timestamp'][0:4] > 2012:
+                # we only want stuff from this import
+                addToFile(current)
 
 
 def startOsmChange():
