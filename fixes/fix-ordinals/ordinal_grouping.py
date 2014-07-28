@@ -109,7 +109,12 @@ def addToFile(item):
         newFile()
         itemCount = 0
 
-    currentFile.write(xmlizeItem(item) + '\n')
+    try:
+        currentFile.write(xmlizeItem(item) + '\n')
+    except:
+        print 'ascii thing'
+        print item
+
     itemCount += 1
 
 
