@@ -103,6 +103,7 @@ def endOsmChange():
 
 def addToFile(item):
     global itemCount
+    global overallCount
     if itemCount >= groupLimit:
         if type(currentFile) is file:
             closeFile()
@@ -110,12 +111,12 @@ def addToFile(item):
         itemCount = 0
 
     try:
+        itemCount += 1
+        overallCount += 1
         currentFile.write(xmlizeItem(item) + '\n')
     except:
         print 'ascii thing'
         print item
-
-    itemCount += 1
 
 
 def xmlizeItem(item):
@@ -161,6 +162,7 @@ accepted = ['node', 'way', 'relation']
 itemCount = groupLimit + 1
 fileCount = 0
 relations = []
+overallCount = 0
 
 
 p = xml.parsers.expat.ParserCreate('utf-8')
@@ -173,3 +175,6 @@ p.ParseFile(open(argv[1], 'r'))
 print '---------------'
 print 'relations:'
 print relations
+
+print '---------------'
+print 'total # of fixes: ' + str(overallCount)
