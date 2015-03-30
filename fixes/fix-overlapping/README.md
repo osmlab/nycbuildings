@@ -1,7 +1,7 @@
 *Easy way to get overlaping buildings in NYC.*
 
-[Data](http://osmose.openstreetmap.fr/export/)
-[csvkit](http://csvkit.readthedocs.org/en/0.9.0/)
+- Data : [osmose](http://osmose.openstreetmap.fr/export/)
+- Tool : [csvkit](http://csvkit.readthedocs.org/en/0.9.0/)
 
 
 ### Execute 
