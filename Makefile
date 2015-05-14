@@ -11,7 +11,7 @@ building_footprints_shape_09-13.zip:
 	curl -L "https://data.cityofnewyork.us/download/tb92-6tj8/application/zip" -o building_footprints_shape_09-13.zip
 
 NYC_AddressPoint.zip:
-	curl -L "https://dl.dropboxusercontent.com/u/479174/NYC/NYC_AddressPoint.zip" -o NYC_AddressPoint.zip
+	curl -L "http://cl.ly/080a2K2A3y0k/download/NYC_AddressPoint.zip" -o NYC_AddressPoint.zip
 
 nyedwi_13a.zip:
 	curl -L "http://www.nyc.gov/html/dcp/download/bytes/nyedwi_13a.zip" -o nyedwi_13a.zip
