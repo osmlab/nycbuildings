@@ -5,16 +5,16 @@ I've done a script to make URL's from all places where  there are  special-co(A,
 
 Grid for  
 
-- [special_co(A)](https://github.com/Rub21/clean-up-address-NYC/blob/master/grid-a-NYC.geojson)
+- [special_co(A)](https://github.com/osmlab/nycbuildings/tree/master/fixes/clean-up-special_co-address/blob/master/grid-a-NYC.geojson)
 
-- [special_co(B)](https://github.com/Rub21/clean-up-address-NYC/blob/master/grid-b-NYC.geojson)
+- [special_co(B)](https://github.com/osmlab/nycbuildings/tree/master/fixes/clean-up-special_co-address/blob/master/grid-b-NYC.geojson)
 
 
 ## How to run
 
-`git clone https://github.com/Rub21/clean-up-address-NYC.git`
+`git clone https://github.com/osmlab/nycbuildings.git`
 
-`cd clean-up-address-NYC`
+`cd nycbuildings/fixes/clean-up-special_co-address/`
 
 `npm install`
 
