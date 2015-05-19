@@ -1,0 +1,14 @@
+{
+  "name": "clean-up-address-NYC",
+  "version": "0.0.1",
+  "description": "clean-up  special-co address A and B",
+  "author": "Rub21",
+  "license": "ISC",
+  "engines": {
+    "node": "0.10.26"
+  },
+  "dependencies": {
+    "optimist": "^0.6.1",
+    "underscore": "^1.8.3"
+  }
+}
