@@ -8,6 +8,7 @@
     "node": "0.10.26"
   },
   "dependencies": {
+    "csv-parser": "^1.6.0",
     "optimist": "^0.6.1",
     "underscore": "^1.8.3"
   }
