@@ -22,15 +22,21 @@ Grid for
 
 - `node index.js --csvfile=b.csv --geofile=grid-b-NYC.geojson`
 
-*it will be create a files called:*
+*it will be create a files:*
 
-- a-urls-1.csv,a-urls-2.csv ...
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a-urls-1.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a-urls-2.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a-urls-3.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a-urls-4.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-urls-1.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-urls-2.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-urls-3.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-urls-4.md
+- https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-urls-5.md
 
 
-- b-urls-1.csv,b-urls-2.csv ...
 
-
-Copy the text from each csv file and paste in a ticked. 
+Copy the text from each file and paste in a ticked. 
 
 
 Click a URL in ticked.  it will be download the objects with special_co (A) and special_co(B) in JOSM.
@@ -49,10 +55,4 @@ and use the next maps in backgroud to fix the adress.
 
 # How to work
 
-when you download the data:
-
-- If the osm objects are/is points as address, remove these points and upload the change or if these point  has a other tag added by users, just remove the tag `addr:housenumber` and `addr:street` 
-
-- If the  osm objects   are ways or relation (buildings), remove  the tag `addr:housenumber` and `addr:street` and upload the change
-
--  If the URL does not give you any data, it is because there is not  any special_co(A,B) address in download place 
+https://github.com/osmlab/nycbuildings/wiki/Import-cleanup
