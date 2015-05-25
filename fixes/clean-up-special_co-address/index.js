@@ -42,11 +42,11 @@ function get_url(val) {
 		for (var i = 0; i < urls.length; i++) {
 			if (urls[i].length > 133) {
 				var text = '- [ ] [' + val.properties.id + '-' + (i + 1) + '](' + urls[i] + ') \n';
-				if (val.properties.id <= 100) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-1.csv", text, function(err) {});
-				if (val.properties.id > 100 && val.properties.id <= 200) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-2.csv", text, function(err) {});
-				if (val.properties.id > 200 && val.properties.id <= 300) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-3.csv", text, function(err) {});
-				if (val.properties.id > 300 && val.properties.id <= 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-4.csv", text, function(err) {});
-				if (val.properties.id > 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-5.csv", text, function(err) {});
+				if (val.properties.id <= 100) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-1.md", text, function(err) {});
+				if (val.properties.id > 100 && val.properties.id <= 200) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-2.md", text, function(err) {});
+				if (val.properties.id > 200 && val.properties.id <= 300) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-3.md", text, function(err) {});
+				if (val.properties.id > 300 && val.properties.id <= 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-4.md", text, function(err) {});
+				if (val.properties.id > 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-5.md", text, function(err) {});
 			}
 		};
 	});
