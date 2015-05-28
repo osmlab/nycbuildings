@@ -9,7 +9,7 @@
   <Parameter name="maxzoom">22</Parameter>
   <Parameter name="minzoom">10</Parameter>
   <Parameter name="name"><![CDATA[Special-co-B-NYC]]></Parameter>
-  <Parameter name="source"><![CDATA[mapbox:///mapbox.mapbox-streets-v5,ruben.5ddc4ac0]]></Parameter>
+  <Parameter name="source"><![CDATA[mapbox:///mapbox.mapbox-streets-v5,ruben.4f2a2097]]></Parameter>
 </Parameters>
 
 

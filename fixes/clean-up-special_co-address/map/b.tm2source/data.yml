@@ -1,19 +1,19 @@
 _prefs: 
   disabled: []
   inspector: false
-  mapid: ruben.5ddc4ac0
-  rev: s-33212090
+  mapid: ruben.4f2a2097
+  rev: s-49b95df3
   saveCenter: true
 attribution: ''
 center: 
-  - -73.8611
-  - 40.7145
-  - 13
+  - 0
+  - 0
+  - 3
 description: ''
 Layer: 
   - id: b
     Datasource: 
-      file: /home/ruben/apps/nycbuildings/fixes/clean-up-special_co-address/shp/b.shp
+      file: /home/ruben/apps/nycbuildings/fixes/clean-up-special_co-address/map/b.shp
       type: shape
     description: ''
     fields: 
@@ -26,4 +26,4 @@ Layer:
     srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
 maxzoom: 13
 minzoom: 0
-name: Special_co-B_NYC21
+name: Special-co-B_NYC

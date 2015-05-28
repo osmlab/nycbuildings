@@ -4,12 +4,12 @@
 
 <Parameters>
   <Parameter name="bounds">-180,-85.0511,180,85.0511</Parameter>
-  <Parameter name="center">-73.7467,40.7744,22</Parameter>
+  <Parameter name="center">-73.7488,40.7745,17</Parameter>
   <Parameter name="format">png8:m=h</Parameter>
   <Parameter name="maxzoom">22</Parameter>
   <Parameter name="minzoom">10</Parameter>
   <Parameter name="name"><![CDATA[Special-co-A-NYC]]></Parameter>
-  <Parameter name="source"><![CDATA[mapbox:///mapbox.mapbox-streets-v5,ruben.f4627b51]]></Parameter>
+  <Parameter name="source"><![CDATA[mapbox:///mapbox.mapbox-streets-v5,ruben.bbfdc6ab]]></Parameter>
 </Parameters>
 
 

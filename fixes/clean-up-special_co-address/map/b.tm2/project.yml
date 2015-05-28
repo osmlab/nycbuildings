@@ -19,7 +19,7 @@ layers: null
 maxzoom: 22
 minzoom: 10
 name: Special-co-B-NYC
-source: "mapbox:///mapbox.mapbox-streets-v5,ruben.5ddc4ac0"
+source: "mapbox:///mapbox.mapbox-streets-v5,ruben.4f2a2097"
 styles: 
   - style.mss
 template: ''
