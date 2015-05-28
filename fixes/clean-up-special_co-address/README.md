@@ -37,6 +37,7 @@ Grid for both files using Qgis:
 
 - [b-processed.csv](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-processed.csv)
 
+*Get URL fron each each grid to download in JOSM*
 
 - `node index.js --geofile=grid-a.geojson`
 
