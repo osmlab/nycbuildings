@@ -3,9 +3,9 @@
 ## 
 I've done a script to make URL's from all places where  there are  special-co(A,B) address.
 
-Original files get from : https://data.cityofnewyork.us/Housing-Development/Building-Footprints/tb92-6tj8
+Original file get from : https://data.cityofnewyork.us/Housing-Development/Building-Footprints/tb92-6tj8
 
-Extract using Qgis:
+Extract Special-co(A,B) using Qgis:
 
 - [Special-co-A](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a.csv)
 - [Special-co-B](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b.csv)
@@ -39,9 +39,9 @@ Grid for both files using Qgis:
 
 *Get URL fron each each grid to download in JOSM*
 
-- `node index.js --geofile=grid-a.geojson`
+- `node index.js --geofile=a.geojson`
 
-- `node index.js --geofile=grid-b.geojson`
+- `node index.js --geofile=b.geojson`
 
 *it will be create a files:*
 

@@ -9,6 +9,22 @@ _.each(grid.features, function(val) {
 	url_download_blocks(val);
 });
 
+function url_download_blocks(val) {
+		var bbox = +val.properties.left + "," + val.properties.top + "," + val.properties.right + "," + val.properties.bottom;
+		var url = "http://127.0.0.1:8111/import?url=http://api.openstreetmap.org/api/0.6/map?bbox=";
+		url = url + bbox;
+		var text = '- [ ] [ Block - ' + val.properties.id + '](' + url + ') \n';
+		if (val.properties.id <= 100) fs.appendFile(argv.geofile.split('.')[0] + "-urls-1.md", text, function(err) {});
+		if (val.properties.id > 100 && val.properties.id <= 200) fs.appendFile(argv.geofile.split('.')[0] + "-urls-2.md", text, function(err) {});
+		if (val.properties.id > 200 && val.properties.id <= 300) fs.appendFile(argv.geofile.split('.')[0] + "-urls-3.md", text, function(err) {});
+		if (val.properties.id > 300 && val.properties.id <= 400) fs.appendFile(argv.geofile.split('.')[0] + "-urls-4.md", text, function(err) {});
+		if (val.properties.id > 400) fs.appendFile(argv.geofile.split('.')[0] + "-urls-5.md", text, function(err) {});
+	}
+
+//bellow code is used to search for addresses using Overpass Api run 
+// node index.js --csvfile=a.csv --geofile=a.geojson
+//node index.js --csvfile=b.csv --geofile=b.geojson
+
 function get_url(val) {
 	var urls = [];
 	var url = 'http://127.0.0.1:8111/import?url=http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:xml][timeout:50];(';
@@ -79,19 +95,3 @@ String.prototype.capitalize = function() {
 		return p1 + p2.toUpperCase();
 	});
 };
-
-
-
-function url_download_blocks(val) {
-	var bbox = +val.properties.left + "," + val.properties.top + "," + val.properties.right + "," + val.properties.bottom;
-	var url = "http://127.0.0.1:8111/import?url=http://api.openstreetmap.org/api/0.6/map?bbox=";
-	url = url + bbox;
-	var text = '- [ ] [ Block - ' + val.properties.id + '](' + url + ') \n';
-	if (val.properties.id <= 100) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-1.md", text, function(err) {});
-	if (val.properties.id > 100 && val.properties.id <= 200) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-2.md", text, function(err) {});
-	if (val.properties.id > 200 && val.properties.id <= 300) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-3.md", text, function(err) {});
-	if (val.properties.id > 300 && val.properties.id <= 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-4.md", text, function(err) {});
-	if (val.properties.id > 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-5.md", text, function(err) {});
-
-
-}
