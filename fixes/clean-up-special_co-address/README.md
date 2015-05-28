@@ -12,9 +12,9 @@ Extract Special-co(A,B) using Qgis:
 
 Grid for both files using Qgis:
 
-- [grid-b.geojson](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/grid-a.geojson)
+- [grid-b.geojson](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a.geojson)
 
-- [grid-b.geojson](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/grid-b.geojson)
+- [grid-b.geojson](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b.geojson)
 
 
 ## How to run
