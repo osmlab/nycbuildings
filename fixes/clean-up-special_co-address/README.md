@@ -32,11 +32,10 @@ Grid for both files using Qgis:
 `node fix.js --file=b.csv`
 
 *Result:*
-- []
 
+- [a-processed.csv](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a-processed.csv)
+- [b-processed.csv](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-processed.csv)
 
-`npm install`
-`npm install`
 
 - `node index.js --csvfile=a.csv --geofile=grid-a-NYC.geojson`
 
