@@ -3,7 +3,14 @@
 ## 
 I've done a script to make URL's from all places where  there are  special-co(A,B) address.
 
-Grid for  
+Original files get from : https://data.cityofnewyork.us/Housing-Development/Building-Footprints/tb92-6tj8
+
+Extract using Qgis:
+
+- [Special-co-A](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a.csv)
+- [Special-co-B](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b.csv)
+
+Grid for both files using Qgis:
 
 - [special_co(A)](https://github.com/osmlab/nycbuildings/tree/master/fixes/clean-up-special_co-address/blob/master/grid-a-NYC.geojson)
 
@@ -16,6 +23,19 @@ Grid for
 
 `cd nycbuildings/fixes/clean-up-special_co-address/`
 
+`npm install`
+
+*Join : "house_num" + "streetname" -> "address"*
+
+`node fix.js --file=a.csv`
+
+`node fix.js --file=b.csv`
+
+*Result:*
+- []
+
+
+`npm install`
 `npm install`
 
 - `node index.js --csvfile=a.csv --geofile=grid-a-NYC.geojson`
@@ -45,11 +65,11 @@ and use the next maps in backgroud to fix the adress.
 
 -  special_co(A)
 
-`https://b.tiles.mapbox.com/v4/ruben.b62d31b1/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicnViZW4iLCJhIjoiYlBrdkpRWSJ9.JgDDxJkvDn3us36aGzR6vg`
+`https://{switch:a,b,c}.tiles.mapbox.com/v4/ruben.ma4ko888/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicnViZW4iLCJhIjoiYlBrdkpRWSJ9.JgDDxJkvDn3us36aGzR6vg`
 
 -  special_co(B)
 
-`https://a.tiles.mapbox.com/v4/ruben.61efb1aa/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicnViZW4iLCJhIjoiYlBrdkpRWSJ9.JgDDxJkvDn3us36aGzR6vg`
+`https://{switch:a,b,c}.tiles.mapbox.com/v4/ruben.ma4lak4o/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicnViZW4iLCJhIjoiYlBrdkpRWSJ9.JgDDxJkvDn3us36aGzR6vg`
 
 
 

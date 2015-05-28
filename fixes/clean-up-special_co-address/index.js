@@ -5,7 +5,8 @@ var csv = require('csv-parser');
 var spreadsheets = [];
 var grid = JSON.parse(fs.readFileSync(argv.geofile, 'utf8'));
 _.each(grid.features, function(val) {
-	get_url(val);
+	//get_url(val);
+	url_download_blocks(val);
 });
 
 function get_url(val) {
@@ -78,3 +79,19 @@ String.prototype.capitalize = function() {
 		return p1 + p2.toUpperCase();
 	});
 };
+
+
+
+function url_download_blocks(val) {
+	var bbox = +val.properties.left + "," + val.properties.top + "," + val.properties.right + "," + val.properties.bottom;
+	var url = "http://127.0.0.1:8111/import?url=http://api.openstreetmap.org/api/0.6/map?bbox=";
+	url = url + bbox;
+	var text = '- [ ] [ Block - ' + val.properties.id + '](' + url + ') \n';
+	if (val.properties.id <= 100) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-1.md", text, function(err) {});
+	if (val.properties.id > 100 && val.properties.id <= 200) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-2.md", text, function(err) {});
+	if (val.properties.id > 200 && val.properties.id <= 300) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-3.md", text, function(err) {});
+	if (val.properties.id > 300 && val.properties.id <= 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-4.md", text, function(err) {});
+	if (val.properties.id > 400) fs.appendFile(argv.csvfile.split('.')[0] + "-urls-5.md", text, function(err) {});
+
+
+}

@@ -1,0 +1,29 @@
+_prefs: 
+  disabled: []
+  inspector: false
+  mapid: ruben.5ddc4ac0
+  rev: s-33212090
+  saveCenter: true
+attribution: ''
+center: 
+  - -73.8611
+  - 40.7145
+  - 13
+description: ''
+Layer: 
+  - id: b
+    Datasource: 
+      file: /home/ruben/apps/nycbuildings/fixes/clean-up-special_co-address/shp/b.shp
+      type: shape
+    description: ''
+    fields: 
+      address: String
+      shapeid: Number
+      x: Number
+      y: Number
+    properties: 
+      "buffer-size": 8
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+maxzoom: 13
+minzoom: 0
+name: Special_co-B_NYC21

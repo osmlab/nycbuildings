@@ -1,0 +1,25 @@
+_prefs: 
+  mapid: ruben.dd0a4852
+  saveCenter: true
+_properties: {}
+attribution: ''
+bounds: 
+  - -180
+  - -85.0511
+  - 180
+  - 85.0511
+center: 
+  - -73.8574
+  - 40.7115
+  - 13
+description: ''
+format: "png8:m=h"
+interactivity_layer: ''
+layers: null
+maxzoom: 22
+minzoom: 10
+name: Special-co-B-NYC
+source: "mapbox:///mapbox.mapbox-streets-v5,ruben.5ddc4ac0"
+styles: 
+  - style.mss
+template: ''
