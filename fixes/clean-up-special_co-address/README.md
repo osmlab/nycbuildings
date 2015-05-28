@@ -12,9 +12,9 @@ Extract using Qgis:
 
 Grid for both files using Qgis:
 
-- [special_co(A)](https://github.com/osmlab/nycbuildings/tree/master/fixes/clean-up-special_co-address/blob/master/grid-a-NYC.geojson)
+- [grid-b.geojson](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/grid-a.geojson)
 
-- [special_co(B)](https://github.com/osmlab/nycbuildings/tree/master/fixes/clean-up-special_co-address/blob/master/grid-b-NYC.geojson)
+- [grid-b.geojson](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/grid-b.geojson)
 
 
 ## How to run
@@ -34,12 +34,13 @@ Grid for both files using Qgis:
 *Result:*
 
 - [a-processed.csv](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/a-processed.csv)
+
 - [b-processed.csv](https://github.com/osmlab/nycbuildings/blob/master/fixes/clean-up-special_co-address/b-processed.csv)
 
 
-- `node index.js --csvfile=a.csv --geofile=grid-a-NYC.geojson`
+- `node index.js --geofile=grid-a.geojson`
 
-- `node index.js --csvfile=b.csv --geofile=grid-b-NYC.geojson`
+- `node index.js --geofile=grid-b.geojson`
 
 *it will be create a files:*
 
