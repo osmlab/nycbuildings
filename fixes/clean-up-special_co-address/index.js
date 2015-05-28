@@ -10,10 +10,7 @@ _.each(grid.features, function(val) {
 });
 
 function url_download_blocks(val) {
-	//var bbox = +val.properties.left + "," + val.properties.top + "," + val.properties.right + "," + val.properties.bottom;
-	//var url = "http://127.0.0.1:8111/import?url=http://api.openstreetmap.org/api/0.6/map?bbox=";
 	var url = 'http://127.0.0.1:8111/load_and_zoom?left=' + val.properties.left + '&bottom=' + val.properties.top + '&right=' + val.properties.right + '&top=' + val.properties.bottom;
-	//url = url + bbox;
 	var text = '- [ ] [ Block - ' + val.properties.id + '](' + url + ') \n';
 	if (val.properties.id <= 100) fs.appendFile(argv.geofile.split('.')[0] + "-urls-1.md", text, function(err) {});
 	if (val.properties.id > 100 && val.properties.id <= 200) fs.appendFile(argv.geofile.split('.')[0] + "-urls-2.md", text, function(err) {});
