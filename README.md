@@ -6,6 +6,11 @@ ready to be used in JOSM for a manual review and upload to OpenStreetMap.
 
 This README is about data conversion. Find **[Import guidelines in the Wiki](https://github.com/osmlab/nycbuildings/wiki)**.
 
+## Blog posts
+
+- [Importing 1 million New York City buildings and addresses](http://www.openstreetmap.org/user/lxbarth/diary/23588)
+- [Over 1 million New York City buildings and addresses imported to OpenStreetMap](https://www.mapbox.com/blog/nyc-buildings-openstreetmap/)
+
 ## Data
 
 [See documentation on OSM Wiki](http://wiki.openstreetmap.org/wiki/Import/Catalogue/NYC_Buildings_Addresses)
